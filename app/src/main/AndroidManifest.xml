@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_logo_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".removeCategoria"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".MenuProdutos"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".adicionaProduto"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Login"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Menu"
+            android:exported="true" />
+        <activity
+            android:name=".selecionarMesa"
+            android:exported="true" />
+        <activity
+            android:name=".mostrarCategoria"
+            android:exported="true" />
+        <activity
+            android:name=".itemListaCategoria"
+            android:exported="true" />
+        <activity
+            android:name=".mostrarProduto"
+            android:exported="true" />
+        <activity
+            android:name=".itemListaProduto"
+            android:exported="true" />
+        <activity
+            android:name=".Configuracao"
+            android:exported="true" />
+        <activity
+            android:name=".itemListaMesa"
+            android:exported="true" />
+        <activity
+            android:name=".quantidadeProduto"
+            android:exported="true" />
+        <activity
+            android:name=".visualizarComanda"
+            android:exported="true" />
+        <activity
+            android:name=".itemListaComanda"
+            android:exported="true" />
+        <activity
+            android:name=".itemListaVisualizarPedido"
+            android:exported="true" />
+        <activity
+            android:name=".removeProduto"
+            android:exported="true" />
+       <activity
+            android:name=".visualizarRemoveProduto"
+            android:exported="true" />
+
+    </application>
+
+</manifest>
