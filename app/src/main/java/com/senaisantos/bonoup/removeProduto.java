@@ -29,11 +29,7 @@ public class removeProduto extends AppCompatActivity {
 
     private Button btnVoltar;
     private ListView listViewProdutos;
-    private TextView lblTitulo;
     private int idCategoria;
-
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
 
     RemoveProdutosAdapter removeProdutosAdapter;
     List<Produto> listaProd;
@@ -46,7 +42,6 @@ public class removeProduto extends AppCompatActivity {
         btnVoltar = (Button) findViewById(R.id.btnVoltar);
 
         listViewProdutos = (ListView) findViewById(R.id.listViewProdutos);
-        lblTitulo = (TextView) findViewById(R.id.lblTitulo);
 
         listaProd = new ArrayList<Produto>();
         removeProdutosAdapter = new RemoveProdutosAdapter(removeProduto.this, listaProd);
@@ -61,9 +56,9 @@ public class removeProduto extends AppCompatActivity {
 
         listarProdutos();
 
-        Pedido p = new Pedido();
+//        Pedido p = new Pedido();
 
-        int numMesa = p.getNumMesa();
+//        int numMesa = p.getNumMesa();
 
         btnVoltar.setOnClickListener(new View.OnClickListener() {
             @Override

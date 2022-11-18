@@ -6,6 +6,7 @@ public class Mesa {
     private int numero;
     private String status;
     private int idPedido;
+    private String nomeCliente;
 
     public int getIdPedido() {
         return idPedido;
@@ -38,5 +39,14 @@ public class Mesa {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getNomeCliente() {
+        return nomeCliente;
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
+    }
+
 }
 

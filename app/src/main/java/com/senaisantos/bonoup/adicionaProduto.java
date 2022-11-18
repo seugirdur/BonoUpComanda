@@ -28,8 +28,6 @@ public class adicionaProduto extends AppCompatActivity implements AdapterView.On
 
     public void onResume(){
         super.onResume();
-
-
     }
 
     @Override
@@ -112,24 +110,9 @@ public class adicionaProduto extends AppCompatActivity implements AdapterView.On
                         try {
 
                             if(result.get("status").getAsString().equals("sucesso")) {
-                                Toast.makeText(adicionaProduto.this, "sucesso adicionado", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(adicionaProduto.this, "Produto adicionado com sucesso!", Toast.LENGTH_SHORT).show();
                             }
-//                            for (int i = 0; i < result.size(); i++) {
-//                                JsonObject obj = result.get(i).getAsJsonObject();
-//
-//                                Mesa m = new Mesa();
-//
-//                                m.setId(obj.get("id").getAsInt());
-//                                m.setNumero(obj.get("numero").getAsInt());
-//                                m.setIdPedido(obj.get("idpedido").getAsInt());
-//
-//                                lista.add(m);
-//                            }
-//                            if(mesaAdapter.getCount() == 0){
-//                                Toast.makeText(adicionaProduto.this, "Nenhuma mesa encontrada.", Toast.LENGTH_LONG).show();
-//                            }
-//
-//                            mesaAdapter.notifyDataSetChanged();
+
                         }catch (Exception erro){
                             Toast.makeText(adicionaProduto.this, "Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
                         }

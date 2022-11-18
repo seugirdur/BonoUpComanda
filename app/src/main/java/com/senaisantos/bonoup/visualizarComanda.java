@@ -1,10 +1,13 @@
 package com.senaisantos.bonoup;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Vibrator;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +15,7 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -43,6 +47,7 @@ public class visualizarComanda extends AppCompatActivity {
     ItensAdapter itensAdapter;
     VisualizarItensAdapter visualizarItensAdapter;
     List<itemPedidoLista> lista;
+    Dialog mDialog;
 
 
     @Override
@@ -174,8 +179,16 @@ public class visualizarComanda extends AppCompatActivity {
                             "Sim",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                    enviarComanda(ip);
+//                                    dialog.cancel();
+                                    mDialog = new Dialog(visualizarComanda.this);
+
+                                    // Defini o click dentro do popup
+                                    mDialog.setContentView(R.layout.pop_nome_cliente);
+                                    mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                    mDialog.show();
+
+
+//
 
                                 }
                             });
@@ -237,6 +250,26 @@ public class visualizarComanda extends AppCompatActivity {
 
     }
 
+    public void enviarNomeCliente(View view) {
+
+        final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
+        final String ip = prefs.getString("ip", "");
+
+        EditText edit=(EditText)mDialog.findViewById(R.id.etNomeCliente);
+        String nomeCliente=edit.getText().toString();
+
+//        EditText etNomeCliente = findViewById(R.id.etNomeCliente);
+//        String nomeCliente = etNomeCliente.getText().toString();
+
+        if (nomeCliente.isEmpty()) {
+            edit.setText("");
+            Toast.makeText(this, "Escreva o nome do cliente", Toast.LENGTH_SHORT).show();
+        } else {
+            enviarComanda(ip, nomeCliente);
+        }
+
+    }
+
     private void listarItensPedido(String ip, int idPedido){
 
         String url = ip + "/listarItensPedido.php";
@@ -274,7 +307,7 @@ public class visualizarComanda extends AppCompatActivity {
     }
 
 
-    private void enviarComanda(String ip){
+    private void enviarComanda(String ip, String nomeCliente){
 
         Pedido p = new Pedido();
         int idMesa = p.getIdMesa();
@@ -286,6 +319,7 @@ public class visualizarComanda extends AppCompatActivity {
                 .load(url)
                 .setBodyParameter("idPedido", Integer.toString(idPedido))
                 .setBodyParameter("idMesa", Integer.toString(idMesa))
+                .setBodyParameter("nomeCliente", nomeCliente)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>(){
                     @Override

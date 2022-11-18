@@ -32,9 +32,6 @@ public class removeCategoria extends AppCompatActivity {
     private ListView listViewCategorias;
     private TextView lblTitulo;
 
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
-
     RemoveCategoriasAdapter removeCategoriasAdapter;
     List<Categoria> lista;
 
@@ -55,12 +52,7 @@ public class removeCategoria extends AppCompatActivity {
         removeCategoriasAdapter = new RemoveCategoriasAdapter(removeCategoria.this, lista);
 
         listViewCategorias.setAdapter(removeCategoriasAdapter);
-
         listarCategorias(ip);
-
-        Pedido p = new Pedido();
-
-        int numMesa = p.getNumMesa();
         lblTitulo.setText("Remover Produto");
 
 
@@ -79,10 +71,10 @@ public class removeCategoria extends AppCompatActivity {
 
                 int idCategoria = lista.get(i).getId();
 
-                Intent mostrarProduto = new Intent(removeCategoria.this, removeProduto.class);
-                mostrarProduto.setFlags(FLAG_ACTIVITY_CLEAR_TOP);
-                mostrarProduto.putExtra("idCategoria", idCategoria);
-                startActivity(mostrarProduto);
+                Intent removeProduto = new Intent(removeCategoria.this, removeProduto.class);
+                removeProduto.setFlags(FLAG_ACTIVITY_CLEAR_TOP);
+                removeProduto.putExtra("idCategoria", idCategoria);
+                startActivity(removeProduto);
             }
         });
 
@@ -114,54 +106,14 @@ public class removeCategoria extends AppCompatActivity {
                             Toast.makeText(removeCategoria.this, "Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
                         }
                     }
-
                 });
     }
 
-    private void cancelarPedido(){
-        final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
-        final String ip = prefs.getString("ip", "");
-
-        String url = ip + "/cancelarPedido.php";
-
-        Pedido p = new Pedido();
-        int idMesa = p.getIdMesa();
-        int idPedido = p.getId();
-
-        Ion.with(removeCategoria.this)
-                .load(url)
-                .setBodyParameter("idMesa", Integer.toString(idMesa))
-                .setBodyParameter("idPedido", Integer.toString(idPedido))
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>(){
-                    @Override
-                    public void onCompleted(Exception e, JsonObject result) {
-                        try {
-                            String RETORNO = result.get("status").getAsString();
-
-                            if (RETORNO.equals("erro")) {
-                                Toast.makeText(removeCategoria.this, "Erro ao cancelar o pedido.", Toast.LENGTH_LONG).show();
-                            } else {
-
-                                Toast.makeText(removeCategoria.this, "Pedido cancelado", Toast.LENGTH_SHORT).show();
-
-                                Intent i = new Intent(removeCategoria.this, MenuProdutos.class);
-                                i.setFlags(FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(i);
-
-                            }
-                        } catch (Exception erro) {
-                            Toast.makeText(removeCategoria.this, "Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
-                        }
-                    }
-
-                });
-    }
 
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(removeCategoria.this, R.style.AlertDialogCustom);
-        builder1.setMessage("Cancelar remoção de produto?");
+        builder1.setMessage("Sair da remoção de produto?");
         builder1.setCancelable(true);
 
         builder1.setPositiveButton(
@@ -169,8 +121,7 @@ public class removeCategoria extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
-                        cancelarPedido();
-
+                        finish();
                     }
                 });
 
@@ -181,10 +132,7 @@ public class removeCategoria extends AppCompatActivity {
                         dialog.cancel();
                     }
                 });
-
         AlertDialog alert11 = builder1.create();
         alert11.show();
-
     }
-
 }

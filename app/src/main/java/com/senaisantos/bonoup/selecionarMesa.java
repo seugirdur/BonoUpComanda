@@ -188,7 +188,9 @@ public class selecionarMesa extends AppCompatActivity {
                                 m.setId(obj.get("id").getAsInt());
                                 m.setNumero(obj.get("numero").getAsInt());
                                 m.setIdPedido(obj.get("idpedido").getAsInt());
-
+                                m.setNomeCliente(obj.get("nomeCliente").getAsString());
+//                                String myName = ;
+//                                Toast.makeText(selecionarMesa.this, obj.get("nomeCliente").getAsString(), Toast.LENGTH_SHORT).show();
                                 lista.add(m);
                             }
                             if(mesaAdapter.getCount() == 0){

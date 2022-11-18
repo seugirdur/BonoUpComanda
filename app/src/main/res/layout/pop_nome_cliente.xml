@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@drawable/background_card_pedido"
+    android:orientation="vertical"
+    >
+
+
+    <TextView
+        android:id="@+id/realmente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Escreva o nome do cliente"
+        android:textColor="@color/colorWhite"
+        android:textSize="20dp"
+        android:fontFamily="@font/hammersmithoneregular"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        />
+
+    <EditText
+        android:id="@+id/etNomeCliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:fontFamily="@font/hammersmithoneregular"
+        android:textColor="@color/colorWhite"
+        android:backgroundTint="@color/colorWhite"
+        android:textAlignment="center"
+        />
+
+    <Button
+        android:id="@+id/btnNomeCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enviar"
+        style="@style/btn_style"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:onClick="enviarNomeCliente"
+        />
+
+
+
+</LinearLayout>

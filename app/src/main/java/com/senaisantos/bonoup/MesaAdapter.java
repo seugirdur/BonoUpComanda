@@ -49,7 +49,14 @@ public class MesaAdapter extends BaseAdapter {
         Mesa m = getItem(position);
         Button btnMesa = (Button) v.findViewById(R.id.btnMesa);
         String numeroMesa = Integer.toString(m.getNumero());
-        btnMesa.setText(numeroMesa);
+        String nomeCliente = m.getNomeCliente();
+        if (nomeCliente==null) {
+            btnMesa.setText(numeroMesa);
+
+        } else {
+            btnMesa.setText(nomeCliente);
+
+        }
 
         btnMesa.setOnClickListener(new View.OnClickListener() {
             @Override
