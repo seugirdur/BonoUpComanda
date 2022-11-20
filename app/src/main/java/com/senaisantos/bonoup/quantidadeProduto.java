@@ -59,8 +59,11 @@ public class quantidadeProduto extends AppCompatActivity {
         }
 
         itemPedido ipe = new itemPedido();
+        String descubra1 = ipe.getNomeProduto();
         lblProduto.setText(ipe.getNomeProduto());
         lblQtd.setText(Integer.toString(ipe.getQtdProduto()));
+        String descubra = String.valueOf(ipe.getPrecoItem());
+        Toast.makeText(this, descubra, Toast.LENGTH_SHORT).show();
 
         if (acao.equalsIgnoreCase("alterar")) {
             btnConfirmarProduto.setText("Atualizar produto");
@@ -187,6 +190,7 @@ public class quantidadeProduto extends AppCompatActivity {
         final itemPedido ipe = new itemPedido();
 
         int idProduto = ipe.getIdProduto();
+        Double precoProduto = ipe.getPrecoItem();
         int qtdProduto = obtemQuantidade();
         int idPedido = p.getId();
 
@@ -197,6 +201,7 @@ public class quantidadeProduto extends AppCompatActivity {
                 .setBodyParameter("idProduto", Integer.toString(idProduto))
                 .setBodyParameter("qtdProduto", Integer.toString(qtdProduto))
                 .setBodyParameter("idPedido", Integer.toString(idPedido))
+                .setBodyParameter("precoProduto", Double.toString(precoProduto))
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>(){
                     @Override

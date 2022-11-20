@@ -287,9 +287,15 @@ public class visualizarComanda extends AppCompatActivity {
 
                                 itemPedidoLista ipe = new itemPedidoLista();
                                 ipe.setNomeProduto(obj.get("nome").getAsString());
+                                String a = ipe.getNomeProduto();
                                 ipe.setQtdProduto(obj.get("qtd").getAsInt());
+                                String b =  String.valueOf(ipe.getQtdProduto());
                                 ipe.setPrecoItem(obj.get("preco").getAsDouble());
+                                String c = String.valueOf(ipe.getPrecoItem());
+                                ipe.setPrecoItemstr(obj.get("preco").getAsString());
+                                String d = ipe.getPrecoItemstr();
                                 ipe.setIdItemPedido(obj.get("iditem").getAsInt());
+                                String f = String.valueOf(ipe.getIdItemPedido());
 
                                 lista.add(ipe);
                             }
@@ -366,6 +372,7 @@ public class visualizarComanda extends AppCompatActivity {
                                 ipe.setNomeProduto(obj.get("nome").getAsString());
                                 ipe.setQtdProduto(obj.get("qtd").getAsInt());
                                 ipe.setIdItemPedido(obj.get("iditem").getAsInt());
+                                ipe.setPrecoItem(obj.get("precoProduto").getAsDouble());
 
                                 lista.add(ipe);
                             }

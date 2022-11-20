@@ -5,6 +5,7 @@ public class itemPedidoLista{
     private int idProduto;
     private int qtdProduto;
     private double precoItem;
+    private String precoItemstr;
     private String nomeProduto;
 
 //    public itemPedido(int id, int idMesa, int idUsuario, String status, int idPedido, int idProduto, int qtdProduto) {
@@ -14,6 +15,14 @@ public class itemPedidoLista{
 //        this.qtdProduto = qtdProduto;
 //    }
 
+
+    public String getPrecoItemstr() {
+        return precoItemstr;
+    }
+
+    public void setPrecoItemstr(String precoItemstr) {
+        this.precoItemstr = precoItemstr;
+    }
 
     public double getPrecoItem() {
         return precoItem;

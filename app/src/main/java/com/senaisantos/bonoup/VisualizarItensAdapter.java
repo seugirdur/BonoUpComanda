@@ -10,7 +10,11 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import org.w3c.dom.Text;
+
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class VisualizarItensAdapter extends BaseAdapter {
 
@@ -51,9 +55,18 @@ public class VisualizarItensAdapter extends BaseAdapter {
         itemPedidoLista ipe = getItem(position);
         TextView itemDescricao = (TextView) v.findViewById(R.id.itemDescricao);
         TextView itemQtd = (TextView) v.findViewById(R.id.itemQtd);
+        TextView itemQtd2 = (TextView) v.findViewById(R.id.itemQtd2);
+
+        Locale ptBr = new Locale("pt", "BR");
 
         itemDescricao.setText(ipe.getNomeProduto());
         itemQtd.setText("Quantidade: " + Integer.toString(ipe.getQtdProduto()));
+        Double lmao = ipe.getPrecoItem();
+
+        Double precoCheio = lmao * ipe.getQtdProduto();
+//        String valorString = NumberFormat.getCurrencyInstance(ptBr).format(ipe.getPrecoItem());
+
+        itemQtd2.setText("Preço: " + Double.toString(precoCheio));
 
         return v;
     }

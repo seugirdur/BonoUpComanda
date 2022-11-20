@@ -58,10 +58,12 @@ public class ItensAdapter extends BaseAdapter {
         itemDescricao.setText(ipe.getNomeProduto());
         itemQtd.setText("Quantidade: " + Integer.toString(ipe.getQtdProduto()));
 
+
         Locale ptBr = new Locale("pt", "BR");
         String valorString = NumberFormat.getCurrencyInstance(ptBr).format(ipe.getPrecoItem());
 
-        itemPreco.setText("Preço: " + valorString);
+//        itemPreco.setText("Preço: " + valorString);
+        itemPreco.setText("Preço: " +Double.toString(ipe.getPrecoItem()));
 
         return v;
     }

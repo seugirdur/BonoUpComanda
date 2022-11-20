@@ -91,11 +91,13 @@ public class mostrarProduto extends AppCompatActivity {
 
                 int idProduto = listaProd.get(i).getId();
                 String descProduto = listaProd.get(i).getDescricao();
+                Double precoProduto = listaProd.get(i).getPreco();
 
                 itemPedido ipe = new itemPedido();
                 ipe.setNomeProduto(descProduto);
                 ipe.setIdProduto(idProduto);
                 ipe.setQtdProduto(1);
+                ipe.setPrecoItem(precoProduto);
 
                 Intent qtdProduto = new Intent(mostrarProduto.this, quantidadeProduto.class);
                 qtdProduto.setFlags(FLAG_ACTIVITY_CLEAR_TOP);
