@@ -63,7 +63,7 @@ public class quantidadeProduto extends AppCompatActivity {
         lblProduto.setText(ipe.getNomeProduto());
         lblQtd.setText(Integer.toString(ipe.getQtdProduto()));
         String descubra = String.valueOf(ipe.getPrecoItem());
-        Toast.makeText(this, descubra, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, descubra, Toast.LENGTH_SHORT).show();
 
         if (acao.equalsIgnoreCase("alterar")) {
             btnConfirmarProduto.setText("Atualizar produto");

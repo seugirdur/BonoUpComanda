@@ -387,13 +387,13 @@ public class visualizarComanda extends AppCompatActivity{
                             String RETORNO = result.get("status").getAsString();
 
                             if (RETORNO.equals("erro")) {
-                                Toast.makeText(visualizarComanda.this, "lmao Erro ao enviar comanda.", Toast.LENGTH_LONG).show();
+//                                Toast.makeText(visualizarComanda.this, "lmao Erro ao enviar comanda.", Toast.LENGTH_LONG).show();
                             } else {
-                                Toast.makeText(visualizarComanda.this, "lmao", Toast.LENGTH_LONG).show();
+//                                Toast.makeText(visualizarComanda.this, "lmao", Toast.LENGTH_LONG).show();
                             }
 
                         }catch (Exception erro){
-                            Toast.makeText(visualizarComanda.this, "lmao Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+//                            Toast.makeText(visualizarComanda.this, "lmao Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
                         }
                     }
 

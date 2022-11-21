@@ -41,7 +41,7 @@ public class visualizarRemoveProduto extends AppCompatActivity {
         lblProduto.setText(ipe.getNomeProduto());
         String idProduto = String.valueOf(ipe.getIdProduto());
 
-        Toast.makeText(this, idProduto, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, idProduto, Toast.LENGTH_SHORT).show();
 
         cancelaRemover.setOnClickListener(new View.OnClickListener() {
             @Override
