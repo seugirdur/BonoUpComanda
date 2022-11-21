@@ -159,6 +159,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
+            android:padding="16dp"
+
             android:text="@string/confirmar_produto"
             android:textSize="20sp" />
     </LinearLayout>

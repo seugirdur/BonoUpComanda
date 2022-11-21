@@ -121,6 +121,8 @@ public class removeCategoria extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
+//                        Intent i = new Intent(removeCategoria.this, MenuProdutos.class);
+//                        startActivity(i);
                         finish();
                     }
                 });

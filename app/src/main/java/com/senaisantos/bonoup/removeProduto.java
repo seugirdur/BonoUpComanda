@@ -86,6 +86,7 @@ public class removeProduto extends AppCompatActivity {
                 Intent visualizarRemoveProduto = new Intent(removeProduto.this, visualizarRemoveProduto.class);
                 visualizarRemoveProduto.setFlags(FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(visualizarRemoveProduto);
+                finish();
             }
         });
 

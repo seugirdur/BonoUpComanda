@@ -111,6 +111,9 @@ public class adicionaProduto extends AppCompatActivity implements AdapterView.On
 
                             if(result.get("status").getAsString().equals("sucesso")) {
                                 Toast.makeText(adicionaProduto.this, "Produto adicionado com sucesso!", Toast.LENGTH_SHORT).show();
+//                                Intent i = new Intent(adicionaProduto.this, MenuProdutos.class);
+//                                startActivity(i);
+                                finish();
                             }
 
                         }catch (Exception erro){

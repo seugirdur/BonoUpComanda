@@ -81,6 +81,8 @@
             style="@style/btn_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="16dp"
+
             android:fontFamily="@font/hammersmithoneregular"
             android:text="@string/visualizar_comanda"
             android:textSize="20sp" />

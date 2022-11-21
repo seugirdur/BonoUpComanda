@@ -82,8 +82,8 @@ public class visualizarRemoveProduto extends AppCompatActivity {
                         try {
                             if(result.get("status").getAsString().equals("sucesso")) {
                                 Toast.makeText(visualizarRemoveProduto.this, "Produto removido com sucesso!", Toast.LENGTH_SHORT).show();
-                                Intent backCategoria = new Intent(visualizarRemoveProduto.this, removeCategoria.class);
-                                startActivity(backCategoria);
+//                                Intent backCategoria = new Intent(visualizarRemoveProduto.this, removeCategoria.class);
+//                                startActivity(backCategoria);
                                 finish();
                             }
                         }catch (Exception erro){

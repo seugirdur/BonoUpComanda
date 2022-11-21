@@ -89,6 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
+                android:padding="16dp"
                 android:text="@string/verificar_conexao"
                 android:textAlignment="center"
                 android:textSize="12sp" />
@@ -108,6 +109,7 @@
         <Button
             android:id="@+id/btnSalvar"
             style="@style/btn_style"
+            android:padding="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"

@@ -98,8 +98,10 @@
                     android:text="nome do produto"
                     android:fontFamily="@font/hammersmithoneregular"
                     android:textAlignment="center"
+                    android:padding="16dp"
+
                     android:textColor="@color/colorWhite"
-                    android:textSize="50sp" />
+                    android:textSize="40sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -117,11 +119,12 @@
                     android:enabled="true"
                     android:fontFamily="@font/hammersmithoneregular"
                     android:includeFontPadding="false"
-                    android:padding="0dp"
+                    android:padding="16dp"
+
                     android:text="SIM"
                     android:textAlignment="center"
                     android:textColor="@color/colorAccent"
-                    android:textSize="60sp"
+                    android:textSize="48sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -134,11 +137,11 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/hammersmithoneregular"
                     android:includeFontPadding="false"
-                    android:padding="0dp"
                     android:text="Não"
+                    android:padding="16dp"
                     android:textAlignment="center"
                     android:textColor="@color/colorAccent"
-                    android:textSize="60sp"
+                    android:textSize="48sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
