@@ -64,9 +64,9 @@ public class VisualizarItensAdapter extends BaseAdapter {
         Double lmao = ipe.getPrecoItem();
 
         Double precoCheio = lmao * ipe.getQtdProduto();
-//        String valorString = NumberFormat.getCurrencyInstance(ptBr).format(ipe.getPrecoItem());
+        String valorString = NumberFormat.getCurrencyInstance(ptBr).format(precoCheio);
 
-        itemQtd2.setText("Preço: " + Double.toString(precoCheio));
+        itemQtd2.setText("Preço: " + valorString);
 
         return v;
     }

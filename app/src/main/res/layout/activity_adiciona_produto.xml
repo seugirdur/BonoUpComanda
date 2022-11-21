@@ -135,12 +135,11 @@
             android:id="@+id/spinnerCategoria"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:backgroundTint="@color/colorWhite"
-            android:background="@color/colorPrimaryDark"
             android:layout_margin="12dp"
+            android:background="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorWhite"
 
-            android:padding="12dp"
-            />
+            android:padding="12dp" />
 
         <Button
             android:id="@+id/btnCadastrarProduto"

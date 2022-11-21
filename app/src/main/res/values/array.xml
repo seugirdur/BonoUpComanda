@@ -8,7 +8,12 @@
         <item>Sobremesa</item>
 </string-array>
 
-
+    <string-array name= "pagamento">
+        <item>Pix</item>
+        <item>Dinheiro</item>
+        <item>Debito</item>
+        <item>Credito</item>
+    </string-array>
 
 
 </resources>

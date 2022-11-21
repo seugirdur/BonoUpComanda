@@ -23,12 +23,22 @@
 
     <style name="btn_style">
         <item name="android:background">@drawable/background_card_pedido</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:ems">10</item>
+        <item name="android:layout_margin">12dp</item>
+<!--        <item name="android:ems">10</item>-->
         <item name="android:fontFamily">@font/hammersmithoneregular</item>
 
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">22sp</item>
+    </style>
+
+
+    <style name="btn_style_inverted">
+        <item name="android:background">@drawable/background_card_pedido_inverted</item>
+        <item name="android:ems">10</item>
+        <item name="android:fontFamily">@font/hammersmithoneregular</item>
+
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="btn_style_number_select">

@@ -14,10 +14,12 @@ import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,20 +28,25 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static android.content.ContentValues.TAG;
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class visualizarComanda extends AppCompatActivity {
+public class visualizarComanda extends AppCompatActivity{
+
+    Context context;
 
     private Button btnVoltar, btnEnviarComanda;
     private ListView listViewItens;
     private TextView lblTitulo;
     private LinearLayout bottom;
+    String tipoPagamento, idCategoria;
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -95,6 +102,7 @@ public class visualizarComanda extends AppCompatActivity {
 
         final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
         final String ip = prefs.getString("ip", "");
+        context = this;
 
         lista = new ArrayList<itemPedidoLista>();
 
@@ -154,10 +162,15 @@ public class visualizarComanda extends AppCompatActivity {
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     dialog.cancel();
-                                    concluirPedido(ip);
+
+
+                                    abrirPagamento();
+
 
                                 }
                             });
+
+
 
                     builder1.setNegativeButton(
                             "Não",
@@ -250,6 +263,146 @@ public class visualizarComanda extends AppCompatActivity {
 
     }
 
+    public void pgtoPix(View view) {
+        tipoPagamento = "Pix";
+
+        final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
+        final String ip = prefs.getString("ip", "");
+        concluirVenda(ip);
+        concluirPedido(ip);
+
+    }
+    public void pgtoDinheiro(View view) {
+        tipoPagamento = "Dinheiro";
+
+        final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
+        final String ip = prefs.getString("ip", "");
+        concluirVenda(ip);
+        concluirPedido(ip);
+    }
+    public void pgtoDebito(View view) {
+        tipoPagamento = "Debito";
+
+        final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
+        final String ip = prefs.getString("ip", "");
+        concluirVenda(ip);
+        concluirPedido(ip);
+    }
+    public void pgtoCredito(View view) {
+        tipoPagamento = "Credito";
+
+        final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
+        final String ip = prefs.getString("ip", "");
+        concluirVenda(ip);
+        concluirPedido(ip);
+    }
+
+    private void abrirPagamento() {
+
+//                                    dialog.cancel();
+            Dialog mDialog = new Dialog(visualizarComanda.this);
+
+            // Defini o click dentro do popup
+            mDialog.setContentView(R.layout.pop_pagamento);
+            mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            mDialog.show();
+
+//            Button btPix = mDialog.findViewById(R.id.pagamentoPix);
+//        Button btDinheiro = mDialog.findViewById(R.id.pagamentoDinheiro);
+//        Button btDebito = mDialog.findViewById(R.id.pagamentoDebito);
+//        Button btCredito = mDialog.findViewById(R.id.pagamentoCredito);
+
+//
+//        Spinner spinnerPagamento = mDialog.findViewById(R.id.spinnerPagamento);
+//
+//        spinnerPagamento.setOnItemSelectedListener(this);
+//
+//        String[] Pagamernto = getResources().getStringArray(R.array.pagamento);
+//        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_custom_item, Pagamernto);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerPagamento.setAdapter(adapter);
+//        Toast.makeText(context, "tipoPagamento", Toast.LENGTH_SHORT).show();
+
+
+//
+
+
+    }
+
+
+
+    private void concluirVenda(String ip) {
+
+        Pedido p = new Pedido();
+        int idPedido = p.getId();
+
+        String cadaNome="";
+        String todosProdutos="";
+        Double precoFinal=0.0;
+
+        int size = lista.size();
+
+        for (int i = 0; i < size; i++) {
+
+            Double precoUnitario = lista.get(i).getPrecoItem();
+            int qtdUnitario = lista.get(i).getQtdProduto();
+
+            Double precoMultiplicado = precoUnitario * qtdUnitario;
+
+            precoFinal+=precoMultiplicado;
+
+            cadaNome = lista.get(i).getNomeProduto();
+
+
+            todosProdutos  += cadaNome+", ";
+        }
+
+
+
+
+
+        String todosProdutosFinal = todosProdutos.substring(0, todosProdutos.length() - 2);
+//        Double lmao = precoFinal;
+//        Toast.makeText(this, todosProdutosFinal, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, idPedido, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, String.valueOf(precoFinal) ,Toast.LENGTH_SHORT).show();
+
+
+
+
+
+        String url = ip + "/concluirVenda.php";
+
+        Ion.with(visualizarComanda.this)
+                .load(url)
+                .setBodyParameter("idPedido", Integer.toString(idPedido))
+                .setBodyParameter("vendaValor", Double.toString(precoFinal))
+                .setBodyParameter("formaPagamento", tipoPagamento)
+                .setBodyParameter("itensComprados", todosProdutosFinal)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>(){
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result){
+                        try {
+                            String RETORNO = result.get("status").getAsString();
+
+                            if (RETORNO.equals("erro")) {
+                                Toast.makeText(visualizarComanda.this, "lmao Erro ao enviar comanda.", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(visualizarComanda.this, "lmao", Toast.LENGTH_LONG).show();
+                            }
+
+                        }catch (Exception erro){
+                            Toast.makeText(visualizarComanda.this, "lmao Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                });
+
+
+
+    }
+
     public void enviarNomeCliente(View view) {
 
         final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
@@ -282,6 +435,8 @@ public class visualizarComanda extends AppCompatActivity {
                     @Override
                     public void onCompleted(Exception e, JsonArray result){
                         try {
+
+                            Double precoFinal=0.0;
                             for (int i = 0; i < result.size(); i++) {
                                 JsonObject obj = result.get(i).getAsJsonObject();
 
@@ -297,8 +452,25 @@ public class visualizarComanda extends AppCompatActivity {
                                 ipe.setIdItemPedido(obj.get("iditem").getAsInt());
                                 String f = String.valueOf(ipe.getIdItemPedido());
 
+                                Double precoUnitario = obj.get("preco").getAsDouble();
+//                                int qtdUnitario = obj.get("qtd").getAsInt();
+
+
+                                precoFinal+=precoUnitario;
+
+
+
+
                                 lista.add(ipe);
                             }
+
+                            Locale ptBr = new Locale("pt", "BR");
+                            String valorString = NumberFormat.getCurrencyInstance(ptBr).format(precoFinal);
+
+                            TextView tvPrecoFinal = findViewById(R.id.precoTotal);
+                            tvPrecoFinal.setEnabled(true);
+                            tvPrecoFinal.setText("Preço total: " + valorString);
+
                             if(itensAdapter.getCount() == 0){
                                 Toast.makeText(visualizarComanda.this, "Nenhum item foi adicionado na comanda.", Toast.LENGTH_LONG).show();
                                 btnEnviarComanda.setEnabled(false);
@@ -365,6 +537,9 @@ public class visualizarComanda extends AppCompatActivity {
                     @Override
                     public void onCompleted(Exception e, JsonArray result){
                         try {
+
+                            Double precoFinal=0.0;
+
                             for (int i = 0; i < result.size(); i++) {
                                 JsonObject obj = result.get(i).getAsJsonObject();
 
@@ -374,8 +549,27 @@ public class visualizarComanda extends AppCompatActivity {
                                 ipe.setIdItemPedido(obj.get("iditem").getAsInt());
                                 ipe.setPrecoItem(obj.get("precoProduto").getAsDouble());
 
+                                Double precoUnitario = obj.get("precoProduto").getAsDouble();
+                                int qtdUnitario = obj.get("qtd").getAsInt();
+
+                                Double precoMultiplicado = precoUnitario * qtdUnitario;
+
+
+                                precoFinal+=precoMultiplicado;
+
+
+
+
                                 lista.add(ipe);
                             }
+
+                            Locale ptBr = new Locale("pt", "BR");
+                            String valorString = NumberFormat.getCurrencyInstance(ptBr).format(precoFinal);
+
+                            TextView tvPrecoFinal = findViewById(R.id.precoTotal);
+                            tvPrecoFinal.setEnabled(true);
+                            tvPrecoFinal.setText("Preço Total: " + valorString);
+
                             if(visualizarItensAdapter.getCount() == 0){
                                 Toast.makeText(visualizarComanda.this, "Nenhum item foi encontrado.", Toast.LENGTH_LONG).show();
                             }
@@ -393,6 +587,7 @@ public class visualizarComanda extends AppCompatActivity {
 
         Pedido p = new Pedido();
         int idPedido = p.getId();
+
 
         String url = ip + "/concluirPedido.php";
 
