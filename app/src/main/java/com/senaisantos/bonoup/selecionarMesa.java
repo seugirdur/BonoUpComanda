@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonArray;
@@ -53,6 +54,8 @@ public class selecionarMesa extends AppCompatActivity {
         }
 
         if(acao.equalsIgnoreCase("consultarMesa")){
+            TextView lblTitulo = findViewById(R.id.lblTitulo);
+            lblTitulo.setText("Selecionar Cliente");
             listarMesasComPedido(ip);
         }else {
             listarMesas(ip);

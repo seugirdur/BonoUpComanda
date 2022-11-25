@@ -26,6 +26,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/selecionar_mesa"
             android:textAlignment="textStart"
+            android:fontFamily="@font/hammersmithoneregular"
             android:textAllCaps="true"
             android:textColor="@color/colorAccent"
             android:textSize="22sp"
