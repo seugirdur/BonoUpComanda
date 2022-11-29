@@ -38,7 +38,7 @@ import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class visualizarComanda extends AppCompatActivity{
+public class visualizarComanda extends AppCompatActivity {
 
     Context context;
 
@@ -58,7 +58,7 @@ public class visualizarComanda extends AppCompatActivity{
 
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
 
         final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
@@ -74,7 +74,7 @@ public class visualizarComanda extends AppCompatActivity{
             acao = in.getStringExtra("acao");
         }
 
-        if(acao.equalsIgnoreCase("consultarMesa")){
+        if (acao.equalsIgnoreCase("consultarMesa")) {
             bottom = (LinearLayout) findViewById(R.id.bottom);
             //bottom.setEnabled(false);
             //bottom.setVisibility(LinearLayout.GONE);
@@ -83,7 +83,7 @@ public class visualizarComanda extends AppCompatActivity{
 
             visualizarItensAdapter.notifyDataSetChanged();
             listarPedidoMesa(ip, p.getIdMesa(), p.getId());
-        }else {
+        } else {
             itensAdapter.notifyDataSetChanged();
             listarItensPedido(ip, p.getId());
         }
@@ -110,7 +110,7 @@ public class visualizarComanda extends AppCompatActivity{
 
         int numMesa = p.getNumMesa();
         int idPedido = p.getId();
-        lblTitulo.setText("Mesa "+numMesa);
+        lblTitulo.setText("Mesa " + numMesa);
 
         String acao = "";
         Bundle extras = getIntent().getExtras();
@@ -119,19 +119,16 @@ public class visualizarComanda extends AppCompatActivity{
             acao = in.getStringExtra("acao");
         }
 
-        if(acao.equalsIgnoreCase("consultarMesa")){
+        if (acao.equalsIgnoreCase("consultarMesa")) {
             visualizarItensAdapter = new VisualizarItensAdapter(visualizarComanda.this, lista);
             listViewItens.setAdapter(visualizarItensAdapter);
 
-            lblTitulo.setText("Mesa "+numMesa+" | Pedido "+idPedido);
+            lblTitulo.setText("Mesa " + numMesa + " | Pedido " + idPedido);
 
-        }else {
+        } else {
             itensAdapter = new ItensAdapter(visualizarComanda.this, lista);
             listViewItens.setAdapter(itensAdapter);
         }
-
-
-
 
 
         btnVoltar.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +149,7 @@ public class visualizarComanda extends AppCompatActivity{
                     acao = in.getStringExtra("acao");
                 }
 
-                if(acao.equalsIgnoreCase("consultarMesa")){
+                if (acao.equalsIgnoreCase("consultarMesa")) {
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(visualizarComanda.this, R.style.AlertDialogCustom);
                     builder1.setMessage("Deseja realmente concluir esse pedido?");
                     builder1.setCancelable(true);
@@ -171,7 +168,6 @@ public class visualizarComanda extends AppCompatActivity{
                             });
 
 
-
                     builder1.setNegativeButton(
                             "Não",
                             new DialogInterface.OnClickListener() {
@@ -183,7 +179,7 @@ public class visualizarComanda extends AppCompatActivity{
                     AlertDialog alert11 = builder1.create();
                     alert11.show();
 
-                }else {
+                } else {
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(visualizarComanda.this, R.style.AlertDialogCustom);
                     builder1.setMessage("Deseja realmente enviar a comanda para cozinha?");
                     builder1.setCancelable(true);
@@ -219,8 +215,6 @@ public class visualizarComanda extends AppCompatActivity{
                 }
 
 
-
-
             }
         });
 
@@ -235,10 +229,10 @@ public class visualizarComanda extends AppCompatActivity{
                     acao = in.getStringExtra("acao");
                 }
 
-                if(acao.equalsIgnoreCase("consultarMesa")){
+                if (acao.equalsIgnoreCase("consultarMesa")) {
                     Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                     vibe.vibrate(20);
-                }else {
+                } else {
 
                     itemPedido ipe = new itemPedido();
 
@@ -272,6 +266,7 @@ public class visualizarComanda extends AppCompatActivity{
         concluirPedido(ip);
 
     }
+
     public void pgtoDinheiro(View view) {
         tipoPagamento = "Dinheiro";
 
@@ -280,14 +275,16 @@ public class visualizarComanda extends AppCompatActivity{
         concluirVenda(ip);
         concluirPedido(ip);
     }
+
     public void pgtoDebito(View view) {
-        tipoPagamento = "Debito";
+        tipoPagamento = "Débito";
 
         final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
         final String ip = prefs.getString("ip", "");
         concluirVenda(ip);
         concluirPedido(ip);
     }
+
     public void pgtoCredito(View view) {
         tipoPagamento = "Credito";
 
@@ -300,12 +297,12 @@ public class visualizarComanda extends AppCompatActivity{
     private void abrirPagamento() {
 
 //                                    dialog.cancel();
-            Dialog mDialog = new Dialog(visualizarComanda.this);
+        Dialog mDialog = new Dialog(visualizarComanda.this);
 
-            // Defini o click dentro do popup
-            mDialog.setContentView(R.layout.pop_pagamento);
-            mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            mDialog.show();
+        // Defini o click dentro do popup
+        mDialog.setContentView(R.layout.pop_pagamento);
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        mDialog.show();
 
 //            Button btPix = mDialog.findViewById(R.id.pagamentoPix);
 //        Button btDinheiro = mDialog.findViewById(R.id.pagamentoDinheiro);
@@ -330,35 +327,63 @@ public class visualizarComanda extends AppCompatActivity{
     }
 
 
-
     private void concluirVenda(String ip) {
 
         Pedido p = new Pedido();
         int idPedido = p.getId();
 
-        String cadaNome="";
-        String todosProdutos="";
-        Double precoFinal=0.0;
-
+        String cadaNome = "";
+        String todosProdutos = "";
+        Double precoFinal = 0.0;
         int size = lista.size();
-
+        int qtddeItens = 0;
         for (int i = 0; i < size; i++) {
+
 
             Double precoUnitario = lista.get(i).getPrecoItem();
             int qtdUnitario = lista.get(i).getQtdProduto();
 
             Double precoMultiplicado = precoUnitario * qtdUnitario;
 
-            precoFinal+=precoMultiplicado;
+            precoFinal += precoMultiplicado;
 
             cadaNome = lista.get(i).getNomeProduto();
+            qtddeItens++;
 
 
-            todosProdutos  += cadaNome+", ";
+
+            String url = ip + "/concluirVenda.php";
+
+            Ion.with(visualizarComanda.this)
+                    .load(url)
+                    .setBodyParameter("idPedido", Integer.toString(idPedido))
+                    .setBodyParameter("vendaValor", Double.toString(precoMultiplicado))
+                    .setBodyParameter("formaPagamento", tipoPagamento)
+                    .setBodyParameter("itensComprados", cadaNome)
+                    .setBodyParameter("qtdItens", Integer.toString(qtdUnitario))
+                    .asJsonObject()
+                    .setCallback(new FutureCallback<JsonObject>() {
+                        @Override
+                        public void onCompleted(Exception e, JsonObject result) {
+                            try {
+                                String RETORNO = result.get("status").getAsString();
+
+                                if (RETORNO.equals("erro")) {
+//                                Toast.makeText(visualizarComanda.this, "lmao Erro ao enviar comanda.", Toast.LENGTH_LONG).show();
+                                } else {
+//                                Toast.makeText(visualizarComanda.this, "lmao", Toast.LENGTH_LONG).show();
+                                }
+
+                            } catch (Exception erro) {
+//                            Toast.makeText(visualizarComanda.this, "lmao Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                    });
+
+
+            todosProdutos += cadaNome + "| ";
         }
-
-
-
 
 
         String todosProdutosFinal = todosProdutos.substring(0, todosProdutos.length() - 2);
@@ -370,37 +395,6 @@ public class visualizarComanda extends AppCompatActivity{
 
 
 
-
-        String url = ip + "/concluirVenda.php";
-
-        Ion.with(visualizarComanda.this)
-                .load(url)
-                .setBodyParameter("idPedido", Integer.toString(idPedido))
-                .setBodyParameter("vendaValor", Double.toString(precoFinal))
-                .setBodyParameter("formaPagamento", tipoPagamento)
-                .setBodyParameter("itensComprados", todosProdutosFinal)
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>(){
-                    @Override
-                    public void onCompleted(Exception e, JsonObject result){
-                        try {
-                            String RETORNO = result.get("status").getAsString();
-
-                            if (RETORNO.equals("erro")) {
-//                                Toast.makeText(visualizarComanda.this, "lmao Erro ao enviar comanda.", Toast.LENGTH_LONG).show();
-                            } else {
-//                                Toast.makeText(visualizarComanda.this, "lmao", Toast.LENGTH_LONG).show();
-                            }
-
-                        }catch (Exception erro){
-//                            Toast.makeText(visualizarComanda.this, "lmao Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
-                        }
-                    }
-
-                });
-
-
-
     }
 
     public void enviarNomeCliente(View view) {
@@ -408,8 +402,8 @@ public class visualizarComanda extends AppCompatActivity{
         final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
         final String ip = prefs.getString("ip", "");
 
-        EditText edit=(EditText)mDialog.findViewById(R.id.etNomeCliente);
-        String nomeCliente=edit.getText().toString();
+        EditText edit = (EditText) mDialog.findViewById(R.id.etNomeCliente);
+        String nomeCliente = edit.getText().toString();
 
 //        EditText etNomeCliente = findViewById(R.id.etNomeCliente);
 //        String nomeCliente = etNomeCliente.getText().toString();
@@ -423,7 +417,7 @@ public class visualizarComanda extends AppCompatActivity{
 
     }
 
-    private void listarItensPedido(String ip, int idPedido){
+    private void listarItensPedido(String ip, int idPedido) {
 
         String url = ip + "/listarItensPedido.php";
 
@@ -431,12 +425,12 @@ public class visualizarComanda extends AppCompatActivity{
                 .load(url)
                 .setBodyParameter("idPedido", Integer.toString(idPedido))
                 .asJsonArray()
-                .setCallback(new FutureCallback<JsonArray>(){
+                .setCallback(new FutureCallback<JsonArray>() {
                     @Override
-                    public void onCompleted(Exception e, JsonArray result){
+                    public void onCompleted(Exception e, JsonArray result) {
                         try {
 
-                            Double precoFinal=0.0;
+                            Double precoFinal = 0.0;
                             for (int i = 0; i < result.size(); i++) {
                                 JsonObject obj = result.get(i).getAsJsonObject();
 
@@ -444,7 +438,7 @@ public class visualizarComanda extends AppCompatActivity{
                                 ipe.setNomeProduto(obj.get("nome").getAsString());
                                 String a = ipe.getNomeProduto();
                                 ipe.setQtdProduto(obj.get("qtd").getAsInt());
-                                String b =  String.valueOf(ipe.getQtdProduto());
+                                String b = String.valueOf(ipe.getQtdProduto());
                                 ipe.setPrecoItem(obj.get("preco").getAsDouble());
                                 String c = String.valueOf(ipe.getPrecoItem());
                                 ipe.setPrecoItemstr(obj.get("preco").getAsString());
@@ -456,9 +450,7 @@ public class visualizarComanda extends AppCompatActivity{
 //                                int qtdUnitario = obj.get("qtd").getAsInt();
 
 
-                                precoFinal+=precoUnitario;
-
-
+                                precoFinal += precoUnitario;
 
 
                                 lista.add(ipe);
@@ -471,12 +463,12 @@ public class visualizarComanda extends AppCompatActivity{
                             tvPrecoFinal.setEnabled(true);
                             tvPrecoFinal.setText("Preço total: " + valorString);
 
-                            if(itensAdapter.getCount() == 0){
+                            if (itensAdapter.getCount() == 0) {
                                 Toast.makeText(visualizarComanda.this, "Nenhum item foi adicionado na comanda.", Toast.LENGTH_LONG).show();
                                 btnEnviarComanda.setEnabled(false);
                             }
                             itensAdapter.notifyDataSetChanged();
-                        }catch (Exception erro){
+                        } catch (Exception erro) {
                             Toast.makeText(visualizarComanda.this, "Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -485,7 +477,7 @@ public class visualizarComanda extends AppCompatActivity{
     }
 
 
-    private void enviarComanda(String ip, String nomeCliente){
+    private void enviarComanda(String ip, String nomeCliente) {
 
         Pedido p = new Pedido();
         int idMesa = p.getIdMesa();
@@ -499,9 +491,9 @@ public class visualizarComanda extends AppCompatActivity{
                 .setBodyParameter("idMesa", Integer.toString(idMesa))
                 .setBodyParameter("nomeCliente", nomeCliente)
                 .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>(){
+                .setCallback(new FutureCallback<JsonObject>() {
                     @Override
-                    public void onCompleted(Exception e, JsonObject result){
+                    public void onCompleted(Exception e, JsonObject result) {
                         try {
                             String RETORNO = result.get("status").getAsString();
 
@@ -515,7 +507,7 @@ public class visualizarComanda extends AppCompatActivity{
                                 Toast.makeText(visualizarComanda.this, "Comanda enviada com sucesso!", Toast.LENGTH_LONG).show();
                             }
 
-                        }catch (Exception erro){
+                        } catch (Exception erro) {
                             Toast.makeText(visualizarComanda.this, "Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -523,7 +515,7 @@ public class visualizarComanda extends AppCompatActivity{
                 });
     }
 
-    private void listarPedidoMesa(String ip, int idMesa, int idPedido){
+    private void listarPedidoMesa(String ip, int idMesa, int idPedido) {
 
 
         String url = ip + "/listarPedidoMesa.php";
@@ -533,12 +525,12 @@ public class visualizarComanda extends AppCompatActivity{
                 .setBodyParameter("idMesa", Integer.toString(idMesa))
                 .setBodyParameter("idPedido", Integer.toString(idPedido))
                 .asJsonArray()
-                .setCallback(new FutureCallback<JsonArray>(){
+                .setCallback(new FutureCallback<JsonArray>() {
                     @Override
-                    public void onCompleted(Exception e, JsonArray result){
+                    public void onCompleted(Exception e, JsonArray result) {
                         try {
 
-                            Double precoFinal=0.0;
+                            Double precoFinal = 0.0;
 
                             for (int i = 0; i < result.size(); i++) {
                                 JsonObject obj = result.get(i).getAsJsonObject();
@@ -555,9 +547,7 @@ public class visualizarComanda extends AppCompatActivity{
                                 Double precoMultiplicado = precoUnitario * qtdUnitario;
 
 
-                                precoFinal+=precoMultiplicado;
-
-
+                                precoFinal += precoMultiplicado;
 
 
                                 lista.add(ipe);
@@ -570,11 +560,11 @@ public class visualizarComanda extends AppCompatActivity{
                             tvPrecoFinal.setEnabled(true);
                             tvPrecoFinal.setText("Preço Total: " + valorString);
 
-                            if(visualizarItensAdapter.getCount() == 0){
+                            if (visualizarItensAdapter.getCount() == 0) {
                                 Toast.makeText(visualizarComanda.this, "Nenhum item foi encontrado.", Toast.LENGTH_LONG).show();
                             }
                             visualizarItensAdapter.notifyDataSetChanged();
-                        }catch (Exception erro){
+                        } catch (Exception erro) {
                             Toast.makeText(visualizarComanda.this, "Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -583,7 +573,7 @@ public class visualizarComanda extends AppCompatActivity{
     }
 
 
-    private void concluirPedido(String ip){
+    private void concluirPedido(String ip) {
 
         Pedido p = new Pedido();
         int idPedido = p.getId();
@@ -595,9 +585,9 @@ public class visualizarComanda extends AppCompatActivity{
                 .load(url)
                 .setBodyParameter("idPedido", Integer.toString(idPedido))
                 .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>(){
+                .setCallback(new FutureCallback<JsonObject>() {
                     @Override
-                    public void onCompleted(Exception e, JsonObject result){
+                    public void onCompleted(Exception e, JsonObject result) {
                         try {
                             String RETORNO = result.get("status").getAsString();
 
@@ -611,7 +601,7 @@ public class visualizarComanda extends AppCompatActivity{
                                 Toast.makeText(visualizarComanda.this, "Pedido concluído com sucesso!", Toast.LENGTH_LONG).show();
                             }
 
-                        }catch (Exception erro){
+                        } catch (Exception erro) {
                             Toast.makeText(visualizarComanda.this, "Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
                         }
                     }
