@@ -24,7 +24,7 @@ public class Configuracao extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private boolean endvalido = false;
-
+    String url, urlTest, ipSolo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +41,13 @@ public class Configuracao extends AppCompatActivity {
         edtEndereco = (EditText) findViewById(R.id.edtEndereco);
 
         if(!ip.isEmpty()){
-            edtEndereco.setText(ip);
+            edtEndereco.setText(ip.substring(7, ip.length()-18));
         }
 
         btnTestar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 checarConexao(edtEndereco.getText().toString());
             }
         });
@@ -61,33 +62,42 @@ public class Configuracao extends AppCompatActivity {
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(endvalido) {
-                    SharedPreferences.Editor editor = prefs.edit();
-                    editor.putString("ip", edtEndereco.getText().toString());
-                    editor.commit();
-
-                    Intent config = new Intent(Configuracao.this, Login.class);
-                    startActivity(config);
-
-                    //finish();
-
-                }else {
-                    Toast.makeText(Configuracao.this, "Preencha um endereço válido antes de salvar", Toast.LENGTH_LONG).show();
-                }
+                doTheConecction();
 
             }
         });
 
     }
 
+    private void doTheConecction(){
+        if(endvalido) {
+            final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
+            String ip = prefs.getString("ip", "");
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("ip", url);
+            editor.commit();
+
+            Intent config = new Intent(Configuracao.this, Login.class);
+            startActivity(config);
+
+            //finish();
+
+        }else {
+            Toast.makeText(Configuracao.this, "Preencha um endereço válido antes de salvar", Toast.LENGTH_LONG).show();
+        }
+    }
+
     private void checarConexao(final String endereco){
-        String url = endereco + "/testa_conexao.php";
+        ipSolo = endereco;
+        url = "http://" + endereco + "/comandaeletronica";
+        urlTest = url+ "/testa_conexao.php";
+//        String url =  endereco + "/testa_conexao.php";
 
         if(endereco.isEmpty()){
             Toast.makeText(Configuracao.this, "Preencha o endereço", Toast.LENGTH_LONG).show();
-        }else if(endereco.toLowerCase().contains("http://") || endereco.toLowerCase().contains("https://")){
+        }else {
             Ion.with(Configuracao.this)
-                    .load(url)
+                    .load(urlTest)
                     .asJsonObject()
                     .setCallback(new FutureCallback<JsonObject>() {
                         @Override
@@ -99,9 +109,11 @@ public class Configuracao extends AppCompatActivity {
 
                                 if(RETORNO.equals("erro")){
                                     Toast.makeText(Configuracao.this, "Endereço existente, porém erro ao conectar no banco de dados", Toast.LENGTH_LONG).show();
-                                }else{
+                                } else{
                                     Toast.makeText(Configuracao.this, "Conexão efetuada com sucesso!", Toast.LENGTH_LONG).show();
+
                                     endvalido = true;
+                                    doTheConecction();
                                 }
                             }catch (Exception erro){
                                 Toast.makeText(Configuracao.this, "Ocorreu um erro! Tente outro endereço.", Toast.LENGTH_LONG).show();
@@ -111,8 +123,6 @@ public class Configuracao extends AppCompatActivity {
                     });
 
 
-        }else{
-            Toast.makeText(Configuracao.this, "Não esqueça de colocar http:// ou https://", Toast.LENGTH_LONG).show();
         }
     }
 

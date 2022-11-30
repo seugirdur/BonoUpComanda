@@ -21,9 +21,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/hammersmithoneregular"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/configuracoes"
             android:textAlignment="textStart"
             android:textAllCaps="true"
@@ -38,12 +39,11 @@
             style="@style/btn_style"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/hammersmithoneregular"            android:text="@string/voltar"
             android:textSize="18sp"
-            android:fontFamily="sans-serif"
-            android:text="@string/voltar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="@font/hammersmithoneregular"
             android:text="@string/endereco_bd"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
@@ -80,7 +80,7 @@
                 android:id="@+id/edtEndereco"
                 style="@style/edt_style"
                 android:layout_weight="1"
-                android:hint="Insira o endereço. Ex: http://192.168.0.1"
+                android:hint="Insira o endereço. Ex: 192.168.0.1"
                 android:inputType="text" />
 
             <Button
@@ -109,10 +109,9 @@
         <Button
             android:id="@+id/btnSalvar"
             style="@style/btn_style"
-            android:padding="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/hammersmithoneregular"           android:padding="16dp"
             android:text="@string/salvar"
             android:textSize="20sp" />
     </LinearLayout>

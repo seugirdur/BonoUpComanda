@@ -24,6 +24,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/hammersmithoneregular"
             android:text="Remover Produtos"
             android:textAlignment="textStart"
             android:textAllCaps="true"
@@ -42,8 +43,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
             android:textSize="18sp"
-            android:fontFamily="sans-serif"
-            android:text="@string/voltar"
+            android:fontFamily="@font/hammersmithoneregular"            android:text="@string/voltar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -25,6 +25,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="@string/mesa"
+            android:fontFamily="@font/hammersmithoneregular"
             android:textAlignment="textStart"
             android:textAllCaps="true"
             android:textColor="@color/colorAccent"
@@ -42,8 +43,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
             android:textSize="18sp"
-            android:fontFamily="sans-serif"
-            android:text="@string/voltar"
+            android:fontFamily="@font/hammersmithoneregular"            android:text="@string/voltar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -79,9 +79,8 @@
             style="@style/btn_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/hammersmithoneregular"
             android:padding="16dp"
-
             android:text="@string/visualizar_comanda"
             android:textSize="20sp" />
     </LinearLayout>
