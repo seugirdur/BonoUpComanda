@@ -2,10 +2,17 @@
 <resources>
 
     <string-array name= "categorias">
-        <item>Lanche</item>
-        <item>Bebida</item>
-        <item>Acompanhamento</item>
-        <item>Sobremesa</item>
+        <item>Adicionais</item>
+        <item>Bebidas</item>
+        <item>Caixa</item>
+        <item>Doces</item>
+        <item>Lanches e Porçoes</item>
+        <item>Padaria e Afins</item>
+        <item>Pastel</item>
+        <item>Promoçoes</item>
+        <item>Salgados Fritos</item>
+        <item>Salgados Assados</item>
+        <item>Sorvetes</item>
 </string-array>
 
     <string-array name= "pagamento">

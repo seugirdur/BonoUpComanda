@@ -40,8 +40,8 @@ public class Configuracao extends AppCompatActivity {
         lblTitulo = (TextView) findViewById(R.id.lblTitulo);
         edtEndereco = (EditText) findViewById(R.id.edtEndereco);
 
-        if(!ip.isEmpty()){
-            edtEndereco.setText(ip.substring(7, ip.length()-18));
+        if (!ip.isEmpty()) {
+            edtEndereco.setText(ip.substring(7, ip.length() - 23));
         }
 
         btnTestar.setOnClickListener(new View.OnClickListener() {
@@ -69,8 +69,39 @@ public class Configuracao extends AppCompatActivity {
 
     }
 
-    private void doTheConecction(){
-        if(endvalido) {
+    public void reiniciarMesa(View view) {
+        final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
+        final String ip = prefs.getString("ip", "");
+        urlTest = ip + "/reiniciarMesas.php";
+
+        Ion.with(Configuracao.this)
+                .load(urlTest)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        try {
+                            String RETORNO = result.get("status").getAsString();
+
+                            //Toast.makeText(Login.this, RETORNO + ".", Toast.LENGTH_LONG).show();
+
+                            if (RETORNO.equals("erro")) {
+                                Toast.makeText(Configuracao.this, "Endereço existente, porém erro ao conectar no banco de dados", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(Configuracao.this, "Mesas reiniciadas com sucesso!", Toast.LENGTH_LONG).show();
+
+                            }
+                        } catch (Exception erro) {
+                            Toast.makeText(Configuracao.this, "Ocorreu um erro! Tente outro endereço.", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                });
+
+    }
+
+    private void doTheConecction() {
+        if (endvalido) {
             final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
             String ip = prefs.getString("ip", "");
             SharedPreferences.Editor editor = prefs.edit();
@@ -82,47 +113,45 @@ public class Configuracao extends AppCompatActivity {
 
             //finish();
 
-        }else {
+        } else {
             Toast.makeText(Configuracao.this, "Preencha um endereço válido antes de salvar", Toast.LENGTH_LONG).show();
         }
     }
 
-    private void checarConexao(final String endereco){
+    private void checarConexao(final String endereco) {
         ipSolo = endereco;
-        url = "http://" + endereco + "/comandaeletronica";
-        urlTest = url+ "/testa_conexao.php";
+        url = "http://" + endereco + ":8000/comandaeletronica";
+        urlTest = url + "/testa_conexao.php";
 //        String url =  endereco + "/testa_conexao.php";
 
-        if(endereco.isEmpty()){
+        if (endereco.isEmpty()) {
             Toast.makeText(Configuracao.this, "Preencha o endereço", Toast.LENGTH_LONG).show();
-        }else {
+        } else {
             Ion.with(Configuracao.this)
                     .load(urlTest)
                     .asJsonObject()
                     .setCallback(new FutureCallback<JsonObject>() {
                         @Override
                         public void onCompleted(Exception e, JsonObject result) {
-                            try{
+                            try {
                                 String RETORNO = result.get("status").getAsString();
 
                                 //Toast.makeText(Login.this, RETORNO + ".", Toast.LENGTH_LONG).show();
 
-                                if(RETORNO.equals("erro")){
+                                if (RETORNO.equals("erro")) {
                                     Toast.makeText(Configuracao.this, "Endereço existente, porém erro ao conectar no banco de dados", Toast.LENGTH_LONG).show();
-                                } else{
+                                } else {
                                     Toast.makeText(Configuracao.this, "Conexão efetuada com sucesso!", Toast.LENGTH_LONG).show();
 
                                     endvalido = true;
                                     doTheConecction();
                                 }
-                            }catch (Exception erro){
+                            } catch (Exception erro) {
                                 Toast.makeText(Configuracao.this, "Ocorreu um erro! Tente outro endereço.", Toast.LENGTH_LONG).show();
                             }
 
                         }
                     });
-
-
         }
     }
 

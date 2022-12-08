@@ -36,7 +36,7 @@
     <Button
         android:id="@+id/pagamentoDinheiro"
         android:layout_width="wrap_content"
-        android:onClick="pgtoDinheiro"
+        android:onClick="calcularTroco"
         android:layout_height="wrap_content"
         android:text="Dinheiro"
         android:layout_marginBottom="30dp"

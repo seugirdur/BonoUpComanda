@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@drawable/background_card_pedido"
+    android:orientation="vertical"
+    android:padding="12dp"
+    >
+
+
+    <TextView
+        android:id="@+id/realmente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valor Total:"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="20dp"
+
+        android:fontFamily="@font/hammersmithoneregular"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        />
+
+    <TextView
+        android:id="@+id/valorTotalComanda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R$0,00"
+        android:textColor="@color/colorWhite"
+        android:textSize="20dp"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:fontFamily="@font/hammersmithoneregular"
+        />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Digite o valor pago pelo cliente:"
+        android:textColor="@color/colorWhite"
+        android:textAlignment="center"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:textSize="20dp"
+        android:fontFamily="@font/hammersmithoneregular"
+        />
+
+        <EditText
+            android:id="@+id/etTrocoDado"
+            android:layout_width="match_parent"
+            android:fontFamily="@font/hammersmithoneregular"
+            android:layout_height="50dp"
+            android:textAlignment="center"
+            android:hint="R$0,00..."
+            android:background="@color/colorWhite"
+            android:layout_margin="22dp"
+            android:padding="12dp"
+            />
+
+
+        <Button
+
+            android:id="@+id/btCalcularTroco"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calcular"
+            style="@style/btn_style_inverted"
+            android:layout_marginBottom="15dp"
+
+            />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Troco:"
+        android:textColor="@color/colorWhite"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:fontFamily="@font/hammersmithoneregular"
+        android:padding="10dp"
+        />
+
+
+    <TextView
+        android:id="@+id/tvTrocoCalculado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R$0,00"
+        android:textColor="@color/colorWhite"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:fontFamily="@font/hammersmithoneregular"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        />
+
+    <TextView
+        android:id="@+id/avisoTrocoNegativo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*aviso troco faltante!!!"
+        android:textColor="@color/colorAccent"
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:textSize="16dp"
+        android:fontFamily="@font/hammersmithoneregular"
+        />
+
+    <Button
+        android:id="@+id/btFinalizarDinheiro"
+        android:onClick="pgtoDinheiro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Finalizar"
+        style="@style/btn_style"
+        android:layout_margin="32dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="42dp"
+        android:paddingRight="42dp"
+
+        />
+
+
+
+
+
+
+</LinearLayout>

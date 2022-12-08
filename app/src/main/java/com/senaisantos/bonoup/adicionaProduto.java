@@ -62,20 +62,41 @@ public class adicionaProduto extends AppCompatActivity implements AdapterView.On
                 String precoProduto = precoProdutoSemFormato.replaceAll(",", ".");
 
 
-                if (categoriaProdutoNome.equals("Lanche")) {
+                if (categoriaProdutoNome.equals("Adicionais")) {
                     idCategoria = "1";
                 }
 
-                if (categoriaProdutoNome.equals("Bebida")) {
+                if (categoriaProdutoNome.equals("Bebidas")) {
                     idCategoria = "2";
                 }
 
-                if (categoriaProdutoNome.equals("Acompanhamento")) {
+                if (categoriaProdutoNome.equals("Caixa")) {
                     idCategoria = "3";
                 }
 
-                if (categoriaProdutoNome.equals("Sobremesa")) {
+                if (categoriaProdutoNome.equals("Doces")) {
                     idCategoria = "4";
+                }
+                if (categoriaProdutoNome.equals("Lanches e Porçoes")) {
+                    idCategoria = "5";
+                }
+                if (categoriaProdutoNome.equals("Padaria e Afins")) {
+                    idCategoria = "6";
+                }
+                if (categoriaProdutoNome.equals("Pastel")) {
+                    idCategoria = "7";
+                }
+                if (categoriaProdutoNome.equals("Promoçoes")) {
+                    idCategoria = "8";
+                }
+                if (categoriaProdutoNome.equals("Salgados Fritos")) {
+                    idCategoria = "9";
+                }
+                if (categoriaProdutoNome.equals("Salgados Assados")) {
+                    idCategoria = "10";
+                }
+                if (categoriaProdutoNome.equals("Sorvetes")) {
+                    idCategoria = "11";
                 }
 
                 adicionarUmProduto(ip, descricaoProduto, precoProduto, idCategoria );

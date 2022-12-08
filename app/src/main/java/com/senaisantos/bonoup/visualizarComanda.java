@@ -28,6 +28,7 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,10 +48,10 @@ public class visualizarComanda extends AppCompatActivity {
     private TextView lblTitulo;
     private LinearLayout bottom;
     String tipoPagamento, idCategoria;
-
+    String valorString;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-
+    Double precoFinal;
     ItensAdapter itensAdapter;
     VisualizarItensAdapter visualizarItensAdapter;
     List<itemPedidoLista> lista;
@@ -268,12 +269,77 @@ public class visualizarComanda extends AppCompatActivity {
     }
 
     public void pgtoDinheiro(View view) {
+
+
+
         tipoPagamento = "Dinheiro";
 
         final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
         final String ip = prefs.getString("ip", "");
         concluirVenda(ip);
         concluirPedido(ip);
+    }
+
+    public void calcularTroco(View view) {
+        Dialog mDialog = new Dialog(visualizarComanda.this);
+
+        // Defini o click dentro do popup
+        mDialog.setContentView(R.layout.pop_troco);
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        mDialog.show();
+
+        TextView valorTotalComanda = (TextView) mDialog.findViewById(R.id.valorTotalComanda);
+        EditText etTrocoDado = (EditText) mDialog.findViewById(R.id.etTrocoDado);
+        TextView tvTrocoCalculado = (TextView) mDialog.findViewById(R.id.tvTrocoCalculado);
+        Button btFinalizarDinheiro = (Button) mDialog.findViewById(R.id.btFinalizarDinheiro);
+        Button btCalcularTroco = (Button) mDialog.findViewById(R.id.btCalcularTroco);
+        TextView avisoTrocoNegativo = (TextView) mDialog.findViewById(R.id.avisoTrocoNegativo);
+
+        valorTotalComanda.setText(valorString);
+
+        btCalcularTroco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String trocoDado = etTrocoDado.getText().toString();
+
+                String trocoDadosemPonto = trocoDado.replaceAll(",", ".");
+//                DecimalFormat df = new DecimalFormat("#,##0.00");
+//                Double lmao = df.format(trocoDadosemPonto);
+// Imprime 0,91238
+//                Double lmao = Double.valueOf(new DecimalFormat("#,##0.00").format(Double.parseDouble(trocoDadosemPonto)));
+
+
+                Double troco = Double.valueOf(Double.parseDouble(trocoDadosemPonto) - precoFinal);
+                DecimalFormat df = new DecimalFormat("#,##0.00");
+
+
+
+                tvTrocoCalculado.setText("R$ " + df.format(troco));
+
+                if (troco<0) {
+                    avisoTrocoNegativo.setVisibility(View.VISIBLE);
+
+                } else {
+                    avisoTrocoNegativo.setVisibility(View.GONE);
+
+                }
+
+
+            }
+        });
+
+
+
+
+
+
+
+//        EditText etTrocoDado = findViewById(R.id.etTrocoDado);
+//        TextView tvTrocoCalculado = findViewById(R.id.tvTrocoCalculado);
+        //        Button btFinalizarDinheiro = findViewById(R.id.btFinalizarDinheiro);
+        //        TextView valorTotalComanda = findViewById(R.id.valorTotalComanda);
+
+
     }
 
     public void pgtoDebito(View view) {
@@ -334,7 +400,7 @@ public class visualizarComanda extends AppCompatActivity {
 
         String cadaNome = "";
         String todosProdutos = "";
-        Double precoFinal = 0.0;
+        precoFinal = 0.0;
         int size = lista.size();
         int qtddeItens = 0;
         for (int i = 0; i < size; i++) {
@@ -430,7 +496,7 @@ public class visualizarComanda extends AppCompatActivity {
                     public void onCompleted(Exception e, JsonArray result) {
                         try {
 
-                            Double precoFinal = 0.0;
+                            precoFinal = 0.0;
                             for (int i = 0; i < result.size(); i++) {
                                 JsonObject obj = result.get(i).getAsJsonObject();
 
@@ -457,7 +523,8 @@ public class visualizarComanda extends AppCompatActivity {
                             }
 
                             Locale ptBr = new Locale("pt", "BR");
-                            String valorString = NumberFormat.getCurrencyInstance(ptBr).format(precoFinal);
+
+                            valorString = NumberFormat.getCurrencyInstance(ptBr).format(precoFinal);
 
                             TextView tvPrecoFinal = findViewById(R.id.precoTotal);
                             tvPrecoFinal.setEnabled(true);
@@ -530,7 +597,7 @@ public class visualizarComanda extends AppCompatActivity {
                     public void onCompleted(Exception e, JsonArray result) {
                         try {
 
-                            Double precoFinal = 0.0;
+                            precoFinal = 0.0;
 
                             for (int i = 0; i < result.size(); i++) {
                                 JsonObject obj = result.get(i).getAsJsonObject();
@@ -554,7 +621,7 @@ public class visualizarComanda extends AppCompatActivity {
                             }
 
                             Locale ptBr = new Locale("pt", "BR");
-                            String valorString = NumberFormat.getCurrencyInstance(ptBr).format(precoFinal);
+                             valorString = NumberFormat.getCurrencyInstance(ptBr).format(precoFinal);
 
                             TextView tvPrecoFinal = findViewById(R.id.precoTotal);
                             tvPrecoFinal.setEnabled(true);

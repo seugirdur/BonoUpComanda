@@ -28,8 +28,9 @@ public class Menu extends AppCompatActivity {
         final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
         String cargo = prefs.getString("cargoUsuario", "");
 
-        if(cargo.equalsIgnoreCase("cozinha")) {
-            btnFazerPedido.setVisibility(View.GONE);
+        if(cargo.equalsIgnoreCase("atendente")) {
+            btnConsultarMesa.setVisibility(View.GONE);
+            btnMenuProdutos.setVisibility(View.GONE);
         }
         btnFazerPedido.setOnClickListener(new View.OnClickListener() {
             @Override
