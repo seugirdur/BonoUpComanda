@@ -19,7 +19,6 @@
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="20dp"
-
         android:fontFamily="@font/hammersmithoneregular"
         android:layout_margin="10dp"
         android:padding="10dp"
@@ -36,8 +35,6 @@
         android:padding="10dp"
         android:fontFamily="@font/hammersmithoneregular"
         />
-
-
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,17 +60,14 @@
             android:padding="12dp"
             />
 
-
         <Button
 
             android:id="@+id/btCalcularTroco"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Calcular"
             style="@style/btn_style_inverted"
             android:layout_marginBottom="15dp"
-
             />
 
     <TextView
@@ -125,11 +119,7 @@
         android:paddingBottom="4dp"
         android:paddingLeft="42dp"
         android:paddingRight="42dp"
-
         />
-
-
-
 
 
 

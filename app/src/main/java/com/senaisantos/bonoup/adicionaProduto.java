@@ -3,7 +3,6 @@ package com.senaisantos.bonoup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -13,14 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
+//tela de adicao de produtos
 public class adicionaProduto extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    //criacao das variaveis
     Button btnCadastrarProduto, btnVoltar;
     EditText etDescricaoProduto, etPrecoProduto;
     Spinner spinnerCategoria;
@@ -35,12 +34,13 @@ public class adicionaProduto extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adiciona_produto);
 
-
+        //busca do ip guardado
         final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
         final String ip = prefs.getString("ip", "");
 
         btnCadastrarProduto=findViewById(R.id.btnCadastrarProduto);
 
+        //criacao do spinner para selecao de categorias
         spinnerCategoria = findViewById(R.id.spinnerCategoria);
 
         spinnerCategoria.setOnItemSelectedListener(this);
@@ -50,8 +50,7 @@ public class adicionaProduto extends AppCompatActivity implements AdapterView.On
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategoria.setAdapter(adapter);
 
-
-
+        //evento de clique do botão para adicionar novo produto
         btnCadastrarProduto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,7 +59,6 @@ public class adicionaProduto extends AppCompatActivity implements AdapterView.On
                 String descricaoProduto = etDescricaoProduto.getText().toString();
                 String precoProdutoSemFormato = etPrecoProduto.getText().toString();
                 String precoProduto = precoProdutoSemFormato.replaceAll(",", ".");
-
 
                 if (categoriaProdutoNome.equals("Adicionais")) {
                     idCategoria = "1";
@@ -104,6 +102,7 @@ public class adicionaProduto extends AppCompatActivity implements AdapterView.On
             }
         });
 
+        //evento de clique de voltar
         btnVoltar=findViewById(R.id.btnVoltarAdc);
         btnVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +114,7 @@ public class adicionaProduto extends AppCompatActivity implements AdapterView.On
 
     }
 
+    //chamada na api para guardar o produto criado
     private void adicionarUmProduto(String ip, String descricaoProduto, String precoProduto, String idCategoria){
 
         String url = ip + "/enviarProduto.php";
@@ -132,8 +132,6 @@ public class adicionaProduto extends AppCompatActivity implements AdapterView.On
 
                             if(result.get("status").getAsString().equals("sucesso")) {
                                 Toast.makeText(adicionaProduto.this, "Produto adicionado com sucesso!", Toast.LENGTH_SHORT).show();
-//                                Intent i = new Intent(adicionaProduto.this, MenuProdutos.class);
-//                                startActivity(i);
                                 finish();
                             }
 
@@ -145,12 +143,11 @@ public class adicionaProduto extends AppCompatActivity implements AdapterView.On
                 });
     }
 
-
+    //leitura do item do spinner para ser guardado na api
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         if(adapterView.getId() == R.id.spinnerCategoria) {
             categoriaProdutoNome = adapterView.getItemAtPosition(i).toString();
-//            Toast.makeText(this, newcategoriaProduto, Toast.LENGTH_SHORT).show();
         }
     }
 

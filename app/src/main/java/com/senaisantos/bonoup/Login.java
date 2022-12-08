@@ -13,6 +13,7 @@ import com.koushikdutta.ion.Ion;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//tela de login
 public class Login extends AppCompatActivity {
 
     private EditText edtUsuario, edtSenha;
@@ -49,6 +50,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //botao de entrar
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,8 +76,6 @@ public class Login extends AppCompatActivity {
                                     public void onCompleted(Exception e, JsonObject result) {
                                         try {
                                             String RETORNO = result.get("status").getAsString();
-
-                                            //Toast.makeText(Login.this, RETORNO + ".", Toast.LENGTH_LONG).show();
 
                                             if (RETORNO.equals("erro")) {
                                                 Toast.makeText(Login.this, "Usuário ou senha incorreto.", Toast.LENGTH_LONG).show();
@@ -116,7 +116,6 @@ public class Login extends AppCompatActivity {
         menu.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(menu);
     }
-    //TESTE
 
     public void redirecionaUsuario(int idUsuario, String cargoUsuario, boolean logado){
 

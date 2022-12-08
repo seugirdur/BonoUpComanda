@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+//classe ferramenta para criacao de lista de categorias
 public class CategoriasAdapter extends BaseAdapter {
 
     private Context ctx;
@@ -21,6 +22,7 @@ public class CategoriasAdapter extends BaseAdapter {
         lista = lista2;
     }
 
+    //retorna o tamanho da lista para ser renderizada
     @Override
     public int getCount() {
         return lista.size();
@@ -40,6 +42,7 @@ public class CategoriasAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup viewGroup) {
         View v = null;
 
+        //pega o design da lista atraves do xml
         if(view == null){
             LayoutInflater inflater = ((Activity)ctx).getLayoutInflater();
             v = inflater.inflate(R.layout.item_lista_categoria, null);
@@ -47,6 +50,7 @@ public class CategoriasAdapter extends BaseAdapter {
             v = view;
         }
 
+        //mapeia os itens presentes na lista
         Categoria c = getItem(position);
         TextView itemNome = (TextView) v.findViewById(R.id.itemNome);
         itemNome.setText(c.getNome());

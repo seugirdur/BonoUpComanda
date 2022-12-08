@@ -16,7 +16,6 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-
         <TextView
             android:id="@+id/lblTitulo"
             android:layout_width="wrap_content"
@@ -26,7 +25,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/hammersmithoneregular"
-
             android:text="Adicionar Produto"
             android:textAlignment="textStart"
             android:textAllCaps="true"
@@ -67,36 +65,18 @@
             android:textColor="@color/colorAccent"
             android:textSize="22sp"
             android:fontFamily="@font/hammersmithoneregular"
-
             android:text="Nome do Produto" />
 
         <EditText
             android:id="@+id/etDescricaoProduto"
             android:layout_width="match_parent"
             android:fontFamily="@font/hammersmithoneregular"
-
             android:layout_height="50dp"
             android:hint="Digite o nome do produto..."
             android:background="@color/colorWhite"
             android:layout_margin="12dp"
             android:padding="12dp"
-
-
             />
-
-
-
-
-<!--        <EditText-->
-
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Digite a categoria do produto..."-->
-<!--            android:background="@color/colorWhite"-->
-<!--            android:layout_margin="10dp"-->
-<!--            android:padding="10dp"-->
-
-<!--            />-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -104,21 +84,17 @@
             android:textColor="@color/colorAccent"
             android:textSize="22sp"
             android:fontFamily="@font/hammersmithoneregular"
-
             android:text="Preço"/>
 
         <EditText
             android:id="@+id/etPrecoProduto"
-
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:fontFamily="@font/hammersmithoneregular"
-
             android:hint="Digite o preço do produto..."
             android:background="@color/colorWhite"
             android:layout_margin="12dp"
             android:padding="12dp"
-
             />
 
         <TextView
@@ -128,7 +104,6 @@
             android:textColor="@color/colorAccent"
             android:textSize="22sp"
             android:fontFamily="@font/hammersmithoneregular"
-
             android:text="Categoria" />
 
         <Spinner
@@ -138,7 +113,6 @@
             android:layout_margin="12dp"
             android:background="@color/colorPrimaryDark"
             android:backgroundTint="@color/colorWhite"
-
             android:padding="12dp" />
 
         <Button
@@ -148,7 +122,6 @@
             android:layout_height="wrap_content"
             android:text="Cadastrar Produto"
             android:padding="16dp"
-
             android:layout_margin="48dp"
             />
 

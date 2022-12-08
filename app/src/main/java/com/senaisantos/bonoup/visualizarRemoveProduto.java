@@ -18,6 +18,7 @@ import com.koushikdutta.ion.Ion;
 
 import java.util.List;
 
+//tela de confirmacao de remocao do produto
 public class visualizarRemoveProduto extends AppCompatActivity {
 
     private Button btnVoltar, cancelaRemover, confirmaRemover;
@@ -41,7 +42,6 @@ public class visualizarRemoveProduto extends AppCompatActivity {
         lblProduto.setText(ipe.getNomeProduto());
         String idProduto = String.valueOf(ipe.getIdProduto());
 
-//        Toast.makeText(this, idProduto, Toast.LENGTH_SHORT).show();
 
         cancelaRemover.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,8 +82,7 @@ public class visualizarRemoveProduto extends AppCompatActivity {
                         try {
                             if(result.get("status").getAsString().equals("sucesso")) {
                                 Toast.makeText(visualizarRemoveProduto.this, "Produto removido com sucesso!", Toast.LENGTH_SHORT).show();
-//                                Intent backCategoria = new Intent(visualizarRemoveProduto.this, removeCategoria.class);
-//                                startActivity(backCategoria);
+
                                 finish();
                             }
                         }catch (Exception erro){

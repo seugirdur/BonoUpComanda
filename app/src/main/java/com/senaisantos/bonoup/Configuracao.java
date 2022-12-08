@@ -9,13 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
-
 import androidx.appcompat.app.AppCompatActivity;
 
+//tela de configuraçao do aplicativo
 public class Configuracao extends AppCompatActivity {
 
     private Button btnVoltar, btnTestar, btnSalvar;
@@ -44,14 +43,15 @@ public class Configuracao extends AppCompatActivity {
             edtEndereco.setText(ip.substring(7, ip.length() - 23));
         }
 
+        //botao de checar conexao
         btnTestar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 checarConexao(edtEndereco.getText().toString());
             }
         });
 
+        //botao de voltar
         btnVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,16 +59,18 @@ public class Configuracao extends AppCompatActivity {
             }
         });
 
+        //botao de salvar ip
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 doTheConecction();
-
             }
         });
 
     }
 
+
+    //botao de reiniciar mesas
     public void reiniciarMesa(View view) {
         final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
         final String ip = prefs.getString("ip", "");
@@ -82,8 +84,6 @@ public class Configuracao extends AppCompatActivity {
                     public void onCompleted(Exception e, JsonObject result) {
                         try {
                             String RETORNO = result.get("status").getAsString();
-
-                            //Toast.makeText(Login.this, RETORNO + ".", Toast.LENGTH_LONG).show();
 
                             if (RETORNO.equals("erro")) {
                                 Toast.makeText(Configuracao.this, "Endereço existente, porém erro ao conectar no banco de dados", Toast.LENGTH_LONG).show();
@@ -111,8 +111,6 @@ public class Configuracao extends AppCompatActivity {
             Intent config = new Intent(Configuracao.this, Login.class);
             startActivity(config);
 
-            //finish();
-
         } else {
             Toast.makeText(Configuracao.this, "Preencha um endereço válido antes de salvar", Toast.LENGTH_LONG).show();
         }
@@ -122,7 +120,6 @@ public class Configuracao extends AppCompatActivity {
         ipSolo = endereco;
         url = "http://" + endereco + ":8000/comandaeletronica";
         urlTest = url + "/testa_conexao.php";
-//        String url =  endereco + "/testa_conexao.php";
 
         if (endereco.isEmpty()) {
             Toast.makeText(Configuracao.this, "Preencha o endereço", Toast.LENGTH_LONG).show();
@@ -135,8 +132,6 @@ public class Configuracao extends AppCompatActivity {
                         public void onCompleted(Exception e, JsonObject result) {
                             try {
                                 String RETORNO = result.get("status").getAsString();
-
-                                //Toast.makeText(Login.this, RETORNO + ".", Toast.LENGTH_LONG).show();
 
                                 if (RETORNO.equals("erro")) {
                                     Toast.makeText(Configuracao.this, "Endereço existente, porém erro ao conectar no banco de dados", Toast.LENGTH_LONG).show();

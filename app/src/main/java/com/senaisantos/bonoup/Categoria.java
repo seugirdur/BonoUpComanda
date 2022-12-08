@@ -1,5 +1,6 @@
 package com.senaisantos.bonoup;
 
+//classe para tipagem de categorias de produtos
 public class Categoria {
 
     private int id;

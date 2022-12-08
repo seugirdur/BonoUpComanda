@@ -18,7 +18,6 @@
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="20dp"
-
         android:fontFamily="@font/hammersmithoneregular"
         android:layout_margin="10dp"
         android:padding="10dp"
@@ -33,6 +32,7 @@
         android:text="Pix"
         style="@style/btn_style_inverted"
         />
+
     <Button
         android:id="@+id/pagamentoDinheiro"
         android:layout_width="wrap_content"
@@ -40,7 +40,6 @@
         android:layout_height="wrap_content"
         android:text="Dinheiro"
         android:layout_marginBottom="30dp"
-
         style="@style/btn_style_inverted"
         />
 
@@ -52,8 +51,8 @@
             android:text="Debito"
             style="@style/btn_style_inverted"
             android:layout_marginBottom="30dp"
-
             />
+
         <Button
             android:id="@+id/pagamentoCredito"
             android:onClick="pgtoCredito"
@@ -62,11 +61,7 @@
             android:text="Crédito"
             style="@style/btn_style_inverted"
             android:layout_marginBottom="30dp"
-
             />
-
-
-
 
 
 </LinearLayout>

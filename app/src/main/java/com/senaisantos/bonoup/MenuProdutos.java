@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+//Tela com menu para os produtos
 public class MenuProdutos extends AppCompatActivity {
 
     Button btnAdicionarProdutos, btnRemoverProdutos, btnVoltarMenuProdutos;
@@ -15,8 +16,6 @@ public class MenuProdutos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_produtos);
-
-
 
         btnAdicionarProdutos=findViewById(R.id.btnAdicionarProduto);
         btnRemoverProdutos=findViewById(R.id.btnRemoverProduto);

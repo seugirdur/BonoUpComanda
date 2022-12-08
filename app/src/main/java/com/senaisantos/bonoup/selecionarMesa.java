@@ -27,6 +27,7 @@ import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//tela de escolha de mesa ou cliente
 public class selecionarMesa extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
@@ -192,8 +193,6 @@ public class selecionarMesa extends AppCompatActivity {
                                 m.setNumero(obj.get("numero").getAsInt());
                                 m.setIdPedido(obj.get("idpedido").getAsInt());
                                 m.setNomeCliente(obj.get("nomeCliente").getAsString());
-//                                String myName = ;
-//                                Toast.makeText(selecionarMesa.this, obj.get("nomeCliente").getAsString(), Toast.LENGTH_SHORT).show();
                                 lista.add(m);
                             }
                             if(mesaAdapter.getCount() == 0){
@@ -230,8 +229,6 @@ public class selecionarMesa extends AppCompatActivity {
                                 Pedido p = new Pedido();
 
                                 p.setId(result.get("idPedido").getAsInt());
-
-                                // Toast.makeText(selecionarMesa.this, "Pedido " + p.getId() + " iniciado", Toast.LENGTH_SHORT).show();
 
                                 Intent i = new Intent(selecionarMesa.this, mostrarCategoria.class);
                                 startActivity(i);

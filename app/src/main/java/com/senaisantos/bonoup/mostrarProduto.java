@@ -25,6 +25,7 @@ import static java.lang.Integer.toString;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//tela de visualização de produtos
 public class mostrarProduto extends AppCompatActivity {
 
     private Button btnVoltar, btnVisualizarComanda;

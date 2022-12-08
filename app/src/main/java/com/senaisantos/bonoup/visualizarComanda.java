@@ -39,6 +39,7 @@ import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//tela de visualizacao de comanda
 public class visualizarComanda extends AppCompatActivity {
 
     Context context;
@@ -77,8 +78,6 @@ public class visualizarComanda extends AppCompatActivity {
 
         if (acao.equalsIgnoreCase("consultarMesa")) {
             bottom = (LinearLayout) findViewById(R.id.bottom);
-            //bottom.setEnabled(false);
-            //bottom.setVisibility(LinearLayout.GONE);
 
             btnEnviarComanda.setText(R.string.marcar_concluido);
 
@@ -160,10 +159,7 @@ public class visualizarComanda extends AppCompatActivity {
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     dialog.cancel();
-
-
                                     abrirPagamento();
-
 
                                 }
                             });
@@ -189,16 +185,11 @@ public class visualizarComanda extends AppCompatActivity {
                             "Sim",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-//                                    dialog.cancel();
                                     mDialog = new Dialog(visualizarComanda.this);
 
-                                    // Defini o click dentro do popup
                                     mDialog.setContentView(R.layout.pop_nome_cliente);
                                     mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                     mDialog.show();
-
-
-//
 
                                 }
                             });
@@ -283,7 +274,6 @@ public class visualizarComanda extends AppCompatActivity {
     public void calcularTroco(View view) {
         Dialog mDialog = new Dialog(visualizarComanda.this);
 
-        // Defini o click dentro do popup
         mDialog.setContentView(R.layout.pop_troco);
         mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mDialog.show();
@@ -303,11 +293,6 @@ public class visualizarComanda extends AppCompatActivity {
                 String trocoDado = etTrocoDado.getText().toString();
 
                 String trocoDadosemPonto = trocoDado.replaceAll(",", ".");
-//                DecimalFormat df = new DecimalFormat("#,##0.00");
-//                Double lmao = df.format(trocoDadosemPonto);
-// Imprime 0,91238
-//                Double lmao = Double.valueOf(new DecimalFormat("#,##0.00").format(Double.parseDouble(trocoDadosemPonto)));
-
 
                 Double troco = Double.valueOf(Double.parseDouble(trocoDadosemPonto) - precoFinal);
                 DecimalFormat df = new DecimalFormat("#,##0.00");
@@ -327,18 +312,6 @@ public class visualizarComanda extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
-
-//        EditText etTrocoDado = findViewById(R.id.etTrocoDado);
-//        TextView tvTrocoCalculado = findViewById(R.id.tvTrocoCalculado);
-        //        Button btFinalizarDinheiro = findViewById(R.id.btFinalizarDinheiro);
-        //        TextView valorTotalComanda = findViewById(R.id.valorTotalComanda);
-
 
     }
 
@@ -362,33 +335,12 @@ public class visualizarComanda extends AppCompatActivity {
 
     private void abrirPagamento() {
 
-//                                    dialog.cancel();
         Dialog mDialog = new Dialog(visualizarComanda.this);
 
         // Defini o click dentro do popup
         mDialog.setContentView(R.layout.pop_pagamento);
         mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mDialog.show();
-
-//            Button btPix = mDialog.findViewById(R.id.pagamentoPix);
-//        Button btDinheiro = mDialog.findViewById(R.id.pagamentoDinheiro);
-//        Button btDebito = mDialog.findViewById(R.id.pagamentoDebito);
-//        Button btCredito = mDialog.findViewById(R.id.pagamentoCredito);
-
-//
-//        Spinner spinnerPagamento = mDialog.findViewById(R.id.spinnerPagamento);
-//
-//        spinnerPagamento.setOnItemSelectedListener(this);
-//
-//        String[] Pagamernto = getResources().getStringArray(R.array.pagamento);
-//        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_custom_item, Pagamernto);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinnerPagamento.setAdapter(adapter);
-//        Toast.makeText(context, "tipoPagamento", Toast.LENGTH_SHORT).show();
-
-
-//
-
 
     }
 
@@ -435,13 +387,11 @@ public class visualizarComanda extends AppCompatActivity {
                                 String RETORNO = result.get("status").getAsString();
 
                                 if (RETORNO.equals("erro")) {
-//                                Toast.makeText(visualizarComanda.this, "lmao Erro ao enviar comanda.", Toast.LENGTH_LONG).show();
-                                } else {
-//                                Toast.makeText(visualizarComanda.this, "lmao", Toast.LENGTH_LONG).show();
+                                Toast.makeText(visualizarComanda.this, "lmao Erro ao enviar comanda.", Toast.LENGTH_LONG).show();
                                 }
 
                             } catch (Exception erro) {
-//                            Toast.makeText(visualizarComanda.this, "lmao Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(visualizarComanda.this, "Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
                             }
                         }
 
@@ -453,13 +403,6 @@ public class visualizarComanda extends AppCompatActivity {
 
 
         String todosProdutosFinal = todosProdutos.substring(0, todosProdutos.length() - 2);
-//        Double lmao = precoFinal;
-//        Toast.makeText(this, todosProdutosFinal, Toast.LENGTH_SHORT).show();
-//        Toast.makeText(this, idPedido, Toast.LENGTH_SHORT).show();
-//        Toast.makeText(this, String.valueOf(precoFinal) ,Toast.LENGTH_SHORT).show();
-
-
-
 
     }
 
@@ -470,9 +413,6 @@ public class visualizarComanda extends AppCompatActivity {
 
         EditText edit = (EditText) mDialog.findViewById(R.id.etNomeCliente);
         String nomeCliente = edit.getText().toString();
-
-//        EditText etNomeCliente = findViewById(R.id.etNomeCliente);
-//        String nomeCliente = etNomeCliente.getText().toString();
 
         if (nomeCliente.isEmpty()) {
             edit.setText("");
@@ -513,7 +453,6 @@ public class visualizarComanda extends AppCompatActivity {
                                 String f = String.valueOf(ipe.getIdItemPedido());
 
                                 Double precoUnitario = obj.get("preco").getAsDouble();
-//                                int qtdUnitario = obj.get("qtd").getAsInt();
 
 
                                 precoFinal += precoUnitario;

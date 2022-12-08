@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//tela de menu após login
 public class Menu extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
@@ -28,6 +29,7 @@ public class Menu extends AppCompatActivity {
         final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
         String cargo = prefs.getString("cargoUsuario", "");
 
+        //verificando cargo para acionar os botoes
         if(cargo.equalsIgnoreCase("atendente")) {
             btnConsultarMesa.setVisibility(View.GONE);
             btnMenuProdutos.setVisibility(View.GONE);

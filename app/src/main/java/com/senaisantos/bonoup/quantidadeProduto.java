@@ -24,6 +24,7 @@ import static java.lang.Integer.toString;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//tela de selecao de quantidade
 public class quantidadeProduto extends AppCompatActivity {
 
     private Button btnVoltar, btnMenos, btnMais, btnConfirmarProduto;
@@ -63,7 +64,6 @@ public class quantidadeProduto extends AppCompatActivity {
         lblProduto.setText(ipe.getNomeProduto());
         lblQtd.setText(Integer.toString(ipe.getQtdProduto()));
         String descubra = String.valueOf(ipe.getPrecoItem());
-//        Toast.makeText(this, descubra, Toast.LENGTH_SHORT).show();
 
         if (acao.equalsIgnoreCase("alterar")) {
             btnConfirmarProduto.setText("Atualizar produto");
@@ -81,8 +81,6 @@ public class quantidadeProduto extends AppCompatActivity {
                 }
             }
         });
-
-
 
         btnMenos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,8 +101,6 @@ public class quantidadeProduto extends AppCompatActivity {
                 int verifica = obtemQuantidade();
             }
         });
-
-
 
         btnVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,8 +138,6 @@ public class quantidadeProduto extends AppCompatActivity {
                 btnMenos.setEnabled(false);
             }
         }
-
-
 
         return qtd;
     }

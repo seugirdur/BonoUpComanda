@@ -1,18 +1,12 @@
 package com.senaisantos.bonoup;
 
+//classe para tipagem de pedidos
 public class itemPedido{
     public static int idItemPedido;
     public static int idProduto;
     public static int qtdProduto;
     public static double precoItem;
     public static String nomeProduto;
-
-//    public itemPedido(int id, int idMesa, int idUsuario, String status, int idPedido, int idProduto, int qtdProduto) {
-//        super(id, idMesa, idUsuario, status);
-//        this.idPedido = idPedido;
-//        this.idProduto = idProduto;
-//        this.qtdProduto = qtdProduto;
-//    }
 
 
     public double getPrecoItem() {

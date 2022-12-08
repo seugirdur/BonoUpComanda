@@ -8,13 +8,6 @@ public class itemPedidoLista{
     private String precoItemstr;
     private String nomeProduto;
 
-//    public itemPedido(int id, int idMesa, int idUsuario, String status, int idPedido, int idProduto, int qtdProduto) {
-//        super(id, idMesa, idUsuario, status);
-//        this.idPedido = idPedido;
-//        this.idProduto = idProduto;
-//        this.qtdProduto = qtdProduto;
-//    }
-
 
     public String getPrecoItemstr() {
         return precoItemstr;

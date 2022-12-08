@@ -25,6 +25,7 @@ import static java.lang.Integer.toString;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//tela de remocao de produto
 public class removeProduto extends AppCompatActivity {
 
     private Button btnVoltar;
@@ -56,9 +57,6 @@ public class removeProduto extends AppCompatActivity {
 
         listarProdutos();
 
-//        Pedido p = new Pedido();
-
-//        int numMesa = p.getNumMesa();
 
         btnVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,8 +64,6 @@ public class removeProduto extends AppCompatActivity {
                 finish();
             }
         });
-
-
 
         listViewProdutos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
