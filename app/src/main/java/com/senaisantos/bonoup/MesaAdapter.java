@@ -7,17 +7,23 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import java.util.List;
 
 public class MesaAdapter extends BaseAdapter {
 
     private selecionarMesa ctx;
-    private List<Mesa> lista;
+
+    private static List<Mesa> lista = null;
 
     public MesaAdapter(selecionarMesa ctx2, List<Mesa> lista2){
         ctx = ctx2;
         lista = lista2;
+    }
+
+    public static void setFilteredList(List<Mesa> filteredList) {
+        lista = filteredList;
     }
 
     @Override
@@ -47,16 +53,20 @@ public class MesaAdapter extends BaseAdapter {
         }
 
         Mesa m = getItem(position);
-        Button btnMesa = (Button) v.findViewById(R.id.btnMesa);
         String numeroMesa = Integer.toString(m.getNumero());
         String nomeCliente = m.getNomeCliente();
-        if (nomeCliente==null) {
-            btnMesa.setText(numeroMesa);
+        Button btnMesa = (Button) v.findViewById(R.id.btnMesa);
 
-        } else {
-            btnMesa.setText(nomeCliente);
+
+
+        if (nomeCliente==null) {
+            btnMesa.setText(Integer.toString(m.getNumero()));
 
         }
+        else {
+            btnMesa.setText(nomeCliente);
+        }
+
 
         btnMesa.setOnClickListener(new View.OnClickListener() {
             @Override

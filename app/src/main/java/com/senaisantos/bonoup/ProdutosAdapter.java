@@ -17,12 +17,25 @@ import java.util.Locale;
 public class ProdutosAdapter extends BaseAdapter {
 
     private Context ctx;
-    private List<Produto> lista;
+    private static List<Produto> lista = null;
+
+
 
     public ProdutosAdapter(mostrarProduto ctx2, List<Produto> lista2){
         ctx = ctx2;
         lista = lista2;
     }
+
+    public static void setFilteredList(List<Produto> filteredList) {
+         lista = filteredList;
+
+
+    }
+
+//    public void setFilteredList(List<Produto> filteredList){
+//        this.lista = filteredList;
+//        notifyDataSetChanged();
+//    }
 
     @Override
     public int getCount() {
@@ -62,6 +75,8 @@ public class ProdutosAdapter extends BaseAdapter {
 
         return v;
     }
+
+
 
     @Nullable
     @Override

@@ -24,6 +24,7 @@ import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static java.lang.Integer.toString;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 //tela de visualização de produtos
 public class mostrarProduto extends AppCompatActivity {
@@ -32,12 +33,15 @@ public class mostrarProduto extends AppCompatActivity {
     private ListView listViewProdutos;
     private TextView lblTitulo;
     private int idCategoria;
+    private SearchView searchView;
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
     ProdutosAdapter produtosAdapter;
     List<Produto> listaProd;
+    List<Produto> filteredList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,25 @@ public class mostrarProduto extends AppCompatActivity {
 
         btnVoltar = (Button) findViewById(R.id.btnVoltar);
         btnVisualizarComanda = (Button) findViewById(R.id.btnVisualizarComanda);
+        searchView = findViewById(R.id.searchprodutos);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+//                produtosAdapter.
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+//                prod
+                filterList(newText);
+
+                return true;
+            }
+        });
+
 
         listViewProdutos = (ListView) findViewById(R.id.listViewProdutos);
         lblTitulo = (TextView) findViewById(R.id.lblTitulo);
@@ -54,6 +77,8 @@ public class mostrarProduto extends AppCompatActivity {
         produtosAdapter = new ProdutosAdapter(mostrarProduto.this, listaProd);
 
         listViewProdutos.setAdapter(produtosAdapter);
+
+
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
@@ -90,9 +115,23 @@ public class mostrarProduto extends AppCompatActivity {
                 Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vibe.vibrate(20);
 
-                int idProduto = listaProd.get(i).getId();
-                String descProduto = listaProd.get(i).getDescricao();
-                Double precoProduto = listaProd.get(i).getPreco();
+//                int idProduto = listaProd.get(i).getId();
+//                String descProduto = listaProd.get(i).getDescricao();
+//                Double precoProduto = listaProd.get(i).getPreco();
+
+                int idProduto;
+                String descProduto;
+                Double precoProduto;
+
+                if (filteredList == null) {
+                    idProduto = listaProd.get(i).getId();
+                    descProduto = listaProd.get(i).getDescricao();
+                    precoProduto = listaProd.get(i).getPreco();
+                } else {
+                    idProduto = filteredList.get(i).getId();
+                    descProduto = filteredList.get(i).getDescricao();
+                    precoProduto = filteredList.get(i).getPreco();
+                }
 
                 itemPedido ipe = new itemPedido();
                 ipe.setNomeProduto(descProduto);
@@ -106,6 +145,31 @@ public class mostrarProduto extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void filterList(String text) {
+        filteredList = new ArrayList<>();
+        for (Produto produto : listaProd) {
+            if (produto.getDescricao().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(produto);
+            }
+        }
+//
+//        if (filteredList.isEmpty()) {
+//            Toast.makeText(mostrarProduto.this, "Item não encontrado", Toast.LENGTH_SHORT).show();
+//        } else {
+//            ProdutosAdapter.setFilteredList(filteredList);
+//        }
+
+        if (filteredList != null) {
+            if (filteredList.isEmpty()) {
+                produtosAdapter.setFilteredList(filteredList);
+            } else {
+                produtosAdapter.setFilteredList(filteredList);
+                ProdutosAdapter.setFilteredList(filteredList);
+
+            }
+        }
     }
 
     private void listarProdutos(){

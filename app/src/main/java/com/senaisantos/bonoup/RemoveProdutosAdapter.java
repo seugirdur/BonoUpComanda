@@ -17,11 +17,17 @@ import java.util.Locale;
 public class RemoveProdutosAdapter extends BaseAdapter {
 
     private Context ctx;
-    private List<Produto> lista;
+    private static List<Produto> lista = null;
 
     public RemoveProdutosAdapter(removeProduto ctx2, List<Produto> lista2){
         ctx = ctx2;
         lista = lista2;
+    }
+
+    public static void setFilteredList(List<Produto> filteredList) {
+        lista = filteredList;
+
+
     }
 
     @Override

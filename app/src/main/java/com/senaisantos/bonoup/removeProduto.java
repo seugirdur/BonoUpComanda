@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
-import static java.lang.Integer.toString;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 //tela de remocao de produto
 public class removeProduto extends AppCompatActivity {
@@ -31,14 +31,19 @@ public class removeProduto extends AppCompatActivity {
     private Button btnVoltar;
     private ListView listViewProdutos;
     private int idCategoria;
+    private SearchView searchView;
+
 
     RemoveProdutosAdapter removeProdutosAdapter;
     List<Produto> listaProd;
+    List<Produto> filteredList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.remove_produto);
+
+        searchView = findViewById(R.id.removesearchprodutos);
 
         btnVoltar = (Button) findViewById(R.id.btnVoltar);
 
@@ -49,6 +54,7 @@ public class removeProduto extends AppCompatActivity {
 
         listViewProdutos.setAdapter(removeProdutosAdapter);
 
+
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             Intent in = getIntent();
@@ -56,6 +62,24 @@ public class removeProduto extends AppCompatActivity {
         }
 
         listarProdutos();
+
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+//                produtosAdapter.
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+//                prod
+                filterList(newText);
+
+                return true;
+            }
+        });
 
 
         btnVoltar.setOnClickListener(new View.OnClickListener() {
@@ -70,9 +94,20 @@ public class removeProduto extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vibe.vibrate(20);
+//
+//                int idProduto = listaProd.get(i).getId();
+//                String descProduto = listaProd.get(i).getDescricao();
 
-                int idProduto = listaProd.get(i).getId();
-                String descProduto = listaProd.get(i).getDescricao();
+                int idProduto;
+                String descProduto;
+
+                if (filteredList == null) {
+                    idProduto = listaProd.get(i).getId();
+                    descProduto = listaProd.get(i).getDescricao();
+                } else {
+                    idProduto = filteredList.get(i).getId();
+                    descProduto = filteredList.get(i).getDescricao();
+                }
 
                 itemPedido ipe = new itemPedido();
                 ipe.setNomeProduto(descProduto);
@@ -87,6 +122,33 @@ public class removeProduto extends AppCompatActivity {
         });
 
     }
+
+    private void filterList(String text) {
+        filteredList = new ArrayList<>();
+        for (Produto produto : listaProd) {
+            if (produto.getDescricao().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(produto);
+            }
+        }
+//
+//        if (filteredList.isEmpty()) {
+//            Toast.makeText(removeProduto.this, "Item não encontrado", Toast.LENGTH_SHORT).show();
+//        } else {
+//            RemoveProdutosAdapter.setFilteredList(filteredList);
+//        }
+
+
+        if (filteredList != null) {
+            if (filteredList.isEmpty()) {
+                removeProdutosAdapter.setFilteredList(filteredList);
+            } else {
+                removeProdutosAdapter.setFilteredList(filteredList);
+                            RemoveProdutosAdapter.setFilteredList(filteredList);
+
+            }
+        }
+    }
+
 
     private void listarProdutos(){
         final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);

@@ -26,6 +26,7 @@ import java.util.List;
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 //tela de escolha de mesa ou cliente
 public class selecionarMesa extends AppCompatActivity {
@@ -37,6 +38,9 @@ public class selecionarMesa extends AppCompatActivity {
     private GridView GridViewMesas;
     MesaAdapter mesaAdapter;
     List<Mesa> lista;
+    List<Mesa> filteredList;
+//    SearchView searchView;
+
 
     @Override
     public void onResume(){
@@ -58,8 +62,12 @@ public class selecionarMesa extends AppCompatActivity {
             TextView lblTitulo = findViewById(R.id.lblTitulo);
             lblTitulo.setText("Selecionar Cliente");
             listarMesasComPedido(ip);
+//            searchView.setVisibility(View.VISIBLE);
+
         }else {
             listarMesas(ip);
+//            searchView.setVisibility(View.GONE);
+
         }
 
     }
@@ -67,6 +75,25 @@ public class selecionarMesa extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selecionar_mesa);
+//        searchView = findViewById(R.id.searchclientes);
+//        searchView.clearFocus();
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+////                produtosAdapter.
+//
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+////                prod
+//                filterList(newText);
+//
+//                return true;
+//            }
+//        });
+
 
         final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
         final String ip = prefs.getString("ip", "");
@@ -80,15 +107,36 @@ public class selecionarMesa extends AppCompatActivity {
 
         GridViewMesas.setAdapter(mesaAdapter);
 
+
+
         GridViewMesas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vibe.vibrate(20);
 
+
                 int idMesa = lista.get(position).getId();
                 int numMesa = lista.get(position).getNumero();
                 int idPedido = lista.get(position).getIdPedido();
+
+//                int idMesa;
+//                int numMesa;
+//                int idPedido;
+//                String nomeCliente;
+//
+//                if (filteredList == null) {
+//                    idMesa = lista.get(position).getId();
+//                    numMesa = lista.get(position).getNumero();
+//                    idPedido = lista.get(position).getIdPedido();
+//                    nomeCliente = lista.get(position).getNomeCliente();
+//
+//                } else {
+//                    idMesa = filteredList.get(position).getId();
+//                    numMesa = filteredList.get(position).getNumero();
+//                    idPedido = filteredList.get(position).getIdPedido();
+//                    nomeCliente = filteredList.get(position).getNomeCliente();
+//                }
 
 
                 String acao = "";
@@ -134,6 +182,31 @@ public class selecionarMesa extends AppCompatActivity {
         });
 
 
+    }
+
+    private void filterList(String text) {
+        filteredList = new ArrayList<>();
+        for (Mesa mesa : lista) {
+            if (mesa.getNomeCliente().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(mesa);
+            }
+        }
+
+        if (filteredList != null) {
+            if (filteredList.isEmpty()) {
+                mesaAdapter.setFilteredList(filteredList);
+            } else {
+                mesaAdapter.setFilteredList(filteredList);
+                MesaAdapter.setFilteredList(filteredList);
+
+            }
+        }
+
+//        if (filteredList.isEmpty()) {
+//            Toast.makeText(selecionarMesa.this, "item nao encontrado", Toast.LENGTH_SHORT).show();
+//        } else {
+//            MesaAdapter.setFilteredList(filteredList);
+//        }
     }
 
     private void listarMesas(String ip){
