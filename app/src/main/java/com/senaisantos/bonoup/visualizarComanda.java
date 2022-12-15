@@ -344,6 +344,42 @@ public class visualizarComanda extends AppCompatActivity {
 
     }
 
+    public void cancelarPagamento(View view) {
+        naoSalvar();
+    }
+
+    private void naoSalvar() {
+
+        final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
+        final String ip = prefs.getString("ip", "");
+        AlertDialog.Builder builder12 = new AlertDialog.Builder(visualizarComanda.this, R.style.AlertDialogCustom);
+        builder12.setMessage("Deseja realmente cancelar o pagamento?");
+        builder12.setCancelable(true);
+        builder12.setPositiveButton(
+                "Sim",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        concluirPedido(ip);
+
+                    }
+                });
+
+
+        builder12.setNegativeButton(
+                "Não",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder12.create();
+        alert11.show();
+
+
+    }
+
 
     private void concluirVenda(String ip) {
 

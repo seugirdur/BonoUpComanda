@@ -6,7 +6,8 @@
     <string name="senha">Senha</string>
     <string name="sair">Sair</string>
     <string name="menu_principal">Menu Principal</string>
-    <string name="consultar_mesa">Consultar Pedidos</string>
+    <string name="consultar_mesa">Finalizar Pedidos</string>
+    <string name="alterarmesa">Alterar Pedidos</string>
     <string name="fazer_pedido">Fazer pedido</string>
     <string name="selecionar_mesa">Selecionar mesa</string>
     <string name="voltar">Voltar</string>

@@ -68,6 +68,14 @@
             android:text="@string/fazer_pedido" />
 
         <Button
+            android:id="@+id/btnAlterarMesa"
+            style="@style/btn_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/hammersmithoneregular"
+            android:text="@string/alterarmesa" />
+
+        <Button
             android:id="@+id/btnConsultarMesa"
             style="@style/btn_style"
             android:layout_width="match_parent"
