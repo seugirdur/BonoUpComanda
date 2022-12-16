@@ -101,7 +101,7 @@
             android:paddingRight="15dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
-            android:text="@string/enviar_comanda"
+            android:text="@string/enviar_pedido"
             android:textSize="20sp" />
 
         <Button

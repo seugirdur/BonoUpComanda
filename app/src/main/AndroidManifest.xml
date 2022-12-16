@@ -53,10 +53,16 @@
             android:name=".mostrarCategoria"
             android:exported="true" />
         <activity
+            android:name=".alterarCategoria"
+            android:exported="true" />
+        <activity
             android:name=".itemListaCategoria"
             android:exported="true" />
         <activity
             android:name=".mostrarProduto"
+            android:exported="true" />
+        <activity
+            android:name=".alterarProduto"
             android:exported="true" />
         <activity
             android:name=".itemListaProduto"
@@ -69,6 +75,9 @@
             android:exported="true" />
         <activity
             android:name=".quantidadeProduto"
+            android:exported="true" />
+        <activity
+            android:name=".alterarQuantidadeProduto"
             android:exported="true" />
         <activity
             android:name=".visualizarComanda"

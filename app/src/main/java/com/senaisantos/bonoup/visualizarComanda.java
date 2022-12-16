@@ -85,6 +85,7 @@ public class visualizarComanda extends AppCompatActivity {
             visualizarItensAdapter.notifyDataSetChanged();
             listarPedidoMesa(ip, p.getIdMesa(), p.getId());
         } else if (acao.equalsIgnoreCase("alterarMesa")) {
+            btnEnviarComanda.setText(R.string.enviar_comanda);
             Button btnAdicionarMaisProduto = findViewById(R.id.btnAdicionarMaisProduto);
             btnAdicionarMaisProduto.setVisibility(View.VISIBLE);
             bottom = (LinearLayout) findViewById(R.id.bottom);
@@ -514,7 +515,7 @@ public class visualizarComanda extends AppCompatActivity {
     }
 
     public void alterarComanda(View view){
-        Intent alterarComanda = new Intent(this, mostrarCategoria.class);
+        Intent alterarComanda = new Intent(this, alterarCategoria.class);
         startActivity(alterarComanda);
 
     }
