@@ -38,11 +38,11 @@
             android:id="@+id/btnVoltarAdc"
             style="@style/btn_style"
             android:layout_width="100dp"
-            android:fontFamily="@font/hammersmithoneregular"
             android:layout_height="40dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
+            android:fontFamily="@font/hammersmithoneregular"
             android:text="@string/voltar"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -62,49 +62,47 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
-            android:textSize="22sp"
             android:fontFamily="@font/hammersmithoneregular"
-            android:text="Nome do Produto" />
+            android:text="Nome do Produto"
+            android:textColor="@color/colorAccent"
+            android:textSize="22sp" />
 
         <EditText
             android:id="@+id/etDescricaoProduto"
             android:layout_width="match_parent"
-            android:fontFamily="@font/hammersmithoneregular"
             android:layout_height="50dp"
-            android:hint="Digite o nome do produto..."
-            android:background="@color/colorWhite"
             android:layout_margin="12dp"
-            android:padding="12dp"
-            />
+            android:background="@color/colorWhite"
+            android:fontFamily="@font/hammersmithoneregular"
+            android:hint="Digite o nome do produto..."
+            android:padding="12dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
-            android:textSize="22sp"
             android:fontFamily="@font/hammersmithoneregular"
-            android:text="Preço"/>
+            android:text="Preço"
+            android:textColor="@color/colorAccent"
+            android:textSize="22sp" />
 
         <EditText
             android:id="@+id/etPrecoProduto"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_margin="12dp"
+            android:background="@color/colorWhite"
             android:fontFamily="@font/hammersmithoneregular"
             android:hint="Digite o preço do produto..."
-            android:background="@color/colorWhite"
-            android:layout_margin="12dp"
-            android:padding="12dp"
-            />
+            android:padding="12dp" />
 
         <TextView
             android:id="@+id/tvCategoriaProduto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
-            android:textSize="22sp"
             android:fontFamily="@font/hammersmithoneregular"
-            android:text="Categoria" />
+            android:text="Categoria"
+            android:textColor="@color/colorAccent"
+            android:textSize="22sp" />
 
         <Spinner
             android:id="@+id/spinnerCategoria"
@@ -120,10 +118,9 @@
             style="@style/btn_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cadastrar Produto"
-            android:padding="16dp"
             android:layout_margin="48dp"
-            />
+            android:padding="16dp"
+            android:text="Cadastrar Produto" />
 
     </LinearLayout>
 
