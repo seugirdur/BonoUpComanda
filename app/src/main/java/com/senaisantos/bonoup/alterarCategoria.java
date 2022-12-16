@@ -172,30 +172,32 @@ public class alterarCategoria extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(alterarCategoria.this, R.style.AlertDialogCustom);
-        builder1.setMessage("Deseja realmente cancelar o pedido?");
-        builder1.setCancelable(true);
+//        AlertDialog.Builder builder1 = new AlertDialog.Builder(alterarCategoria.this, R.style.AlertDialogCustom);
+//        builder1.setMessage("Deseja realmente cancelar o pedido?");
+//        builder1.setCancelable(true);
+//
+//        builder1.setPositiveButton(
+//                "Sim",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        dialog.cancel();
+//                        cancelarPedido();
+//
+//                    }
+//                });
+//
+//        builder1.setNegativeButton(
+//                "Não",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        dialog.cancel();
+//                    }
+//                });
+//
+//        AlertDialog alert11 = builder1.create();
+//        alert11.show();
 
-        builder1.setPositiveButton(
-                "Sim",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                        cancelarPedido();
-
-                    }
-                });
-
-        builder1.setNegativeButton(
-                "Não",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
+        finish();
 
     }
 
