@@ -14,7 +14,7 @@ public class Menu extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private Button btnSair, btnFazerPedido, btnConsultarMesa, btnMenuProdutos;
+    private Button btnSair, btnFazerPedido, btnConsultarMesa, btnMenuProdutos, btnAlterarMesa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,7 @@ public class Menu extends AppCompatActivity {
 
         btnSair = (Button) findViewById(R.id.btnSair);
         btnFazerPedido = (Button) findViewById(R.id.btnFazerPedido);
+        btnAlterarMesa = findViewById(R.id.btnAlterarMesa);
         btnConsultarMesa = (Button) findViewById(R.id.btnConsultarMesa);
         btnMenuProdutos = (Button) findViewById(R.id.btnMenuProdutos);
 
@@ -48,6 +49,13 @@ public class Menu extends AppCompatActivity {
             }
         });
 
+        btnAlterarMesa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selecionarMesa("alterarMesa");
+            }
+        });
+
         btnSair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,14 +78,11 @@ public class Menu extends AppCompatActivity {
             }
         });
 
-
-
     }
     public void selecionarMesa(String acao){
         Intent selecionaMesa = new Intent(Menu.this, selecionarMesa.class);
         selecionaMesa.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         selecionaMesa.putExtra("acao", acao);
         startActivity(selecionaMesa);
-
     }
 }

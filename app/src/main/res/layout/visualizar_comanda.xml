@@ -70,7 +70,7 @@
     <LinearLayout
         android:id="@+id/bottom"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="150dp"
         android:layout_weight="0"
         android:background="@color/colorAccent"
         android:gravity="center_vertical|center_horizontal"
@@ -87,6 +87,10 @@
             android:enabled="false"
             />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
         <Button
             android:id="@+id/btnEnviarComanda"
             style="@style/btn_style"
@@ -95,8 +99,28 @@
             android:fontFamily="@font/hammersmithoneregular"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:text="@string/enviar_comanda"
             android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnAdicionarMaisProduto"
+            style="@style/btn_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/hammersmithoneregular"
+            android:paddingLeft="15dp"
+            android:onClick="alterarComanda"
+            android:paddingRight="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="@string/alterar_comanda"
+            android:visibility="gone"
+            android:textSize="20sp" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

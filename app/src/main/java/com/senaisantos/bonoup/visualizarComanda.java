@@ -54,6 +54,7 @@ public class visualizarComanda extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     Double precoFinal;
     ItensAdapter itensAdapter;
+    ItensAlteraveisAdapter itensAlteraveisAdapter;
     VisualizarItensAdapter visualizarItensAdapter;
     List<itemPedidoLista> lista;
     Dialog mDialog;
@@ -83,7 +84,20 @@ public class visualizarComanda extends AppCompatActivity {
 
             visualizarItensAdapter.notifyDataSetChanged();
             listarPedidoMesa(ip, p.getIdMesa(), p.getId());
-        } else {
+        } else if (acao.equalsIgnoreCase("alterarMesa")) {
+            Button btnAdicionarMaisProduto = findViewById(R.id.btnAdicionarMaisProduto);
+            btnAdicionarMaisProduto.setVisibility(View.VISIBLE);
+            bottom = (LinearLayout) findViewById(R.id.bottom);
+
+            itensAlteraveisAdapter.notifyDataSetChanged();
+            listarPedidoMesaAlteravel(ip, p.getIdMesa(), p.getId());
+            SharedPreferences.Editor editor = prefs.edit();
+
+//            editor.putString("nomeCliente", nomeCliente);
+            editor.commit();
+        }
+
+        else {
             itensAdapter.notifyDataSetChanged();
             listarItensPedido(ip, p.getId());
         }
@@ -125,7 +139,14 @@ public class visualizarComanda extends AppCompatActivity {
 
             lblTitulo.setText("Mesa " + numMesa + " | Pedido " + idPedido);
 
-        } else {
+        } else if(acao.equalsIgnoreCase("alterarMesa")) {
+            itensAlteraveisAdapter = new ItensAlteraveisAdapter(visualizarComanda.this, lista);
+            listViewItens.setAdapter(itensAlteraveisAdapter);
+
+            lblTitulo.setText("Mesa " + numMesa + " | Pedido " + idPedido);
+        }
+
+        else {
             itensAdapter = new ItensAdapter(visualizarComanda.this, lista);
             listViewItens.setAdapter(itensAdapter);
         }
@@ -176,9 +197,38 @@ public class visualizarComanda extends AppCompatActivity {
                     AlertDialog alert11 = builder1.create();
                     alert11.show();
 
-                } else {
+                }
+                else if(acao.equalsIgnoreCase("alterarMesa")) {
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(visualizarComanda.this, R.style.AlertDialogCustom);
-                    builder1.setMessage("Deseja realmente enviar a comanda para cozinha?");
+                    builder1.setMessage("Deseja realmente enviar a comanda para conclusão?");
+                    builder1.setCancelable(true);
+
+                    builder1.setPositiveButton(
+                            "Sim",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                    enviarComandaConclusao(ip);
+                                }
+                            });
+
+                    builder1.setNegativeButton(
+                            "Não",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+
+
+                }
+
+                else {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(visualizarComanda.this, R.style.AlertDialogCustom);
+                    builder1.setMessage("Deseja realmente enviar a comanda para espera?");
                     builder1.setCancelable(true);
 
                     builder1.setPositiveButton(
@@ -446,16 +496,26 @@ public class visualizarComanda extends AppCompatActivity {
 
         final SharedPreferences prefs = getSharedPreferences("config", Context.MODE_PRIVATE);
         final String ip = prefs.getString("ip", "");
+        final String NomeClientePref = prefs.getString("nomeCliente", "");
 
         EditText edit = (EditText) mDialog.findViewById(R.id.etNomeCliente);
         String nomeCliente = edit.getText().toString();
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("nomeCliente", nomeCliente);
+        editor.commit();
 
         if (nomeCliente.isEmpty()) {
             edit.setText("");
             Toast.makeText(this, "Escreva o nome do cliente", Toast.LENGTH_SHORT).show();
         } else {
-            enviarComanda(ip, nomeCliente);
+            enviarComandaAlteravel(ip, nomeCliente);
         }
+
+    }
+
+    public void alterarComanda(View view){
+        Intent alterarComanda = new Intent(this, mostrarCategoria.class);
+        startActivity(alterarComanda);
 
     }
 
@@ -519,19 +579,57 @@ public class visualizarComanda extends AppCompatActivity {
     }
 
 
-    private void enviarComanda(String ip, String nomeCliente) {
+    private void enviarComandaAlteravel(String ip, String nomeCliente) {
 
         Pedido p = new Pedido();
         int idMesa = p.getIdMesa();
         int idPedido = p.getId();
 
-        String url = ip + "/enviarComanda.php";
+        String url = ip + "/enviarComandaAlteravel.php";
 
         Ion.with(visualizarComanda.this)
                 .load(url)
                 .setBodyParameter("idPedido", Integer.toString(idPedido))
                 .setBodyParameter("idMesa", Integer.toString(idMesa))
                 .setBodyParameter("nomeCliente", nomeCliente)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        try {
+                            String RETORNO = result.get("status").getAsString();
+
+                            if (RETORNO.equals("erro")) {
+                                Toast.makeText(visualizarComanda.this, "Erro ao enviar comanda.", Toast.LENGTH_LONG).show();
+                            } else {
+                                Intent i = new Intent(visualizarComanda.this, Menu.class);
+                                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(i);
+
+                                Toast.makeText(visualizarComanda.this, "Comanda enviada com sucesso!", Toast.LENGTH_LONG).show();
+                            }
+
+                        } catch (Exception erro) {
+                            Toast.makeText(visualizarComanda.this, "Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                });
+    }
+
+
+    private void enviarComandaConclusao(String ip) {
+
+        Pedido p = new Pedido();
+        int idMesa = p.getIdMesa();
+        int idPedido = p.getId();
+
+        String url = ip + "/enviarComandaConclusao.php";
+
+        Ion.with(visualizarComanda.this)
+                .load(url)
+                .setBodyParameter("idPedido", Integer.toString(idPedido))
+                .setBodyParameter("idMesa", Integer.toString(idMesa))
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
@@ -614,6 +712,62 @@ public class visualizarComanda extends AppCompatActivity {
                 });
     }
 
+    private void listarPedidoMesaAlteravel(String ip, int idMesa, int idPedido) {
+
+
+        String url = ip + "/listarPedidoMesaAlteravel.php";
+
+        Ion.with(visualizarComanda.this)
+                .load(url)
+                .setBodyParameter("idMesa", Integer.toString(idMesa))
+                .setBodyParameter("idPedido", Integer.toString(idPedido))
+                .asJsonArray()
+                .setCallback(new FutureCallback<JsonArray>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonArray result) {
+                        try {
+
+                            precoFinal = 0.0;
+
+                            for (int i = 0; i < result.size(); i++) {
+                                JsonObject obj = result.get(i).getAsJsonObject();
+
+                                itemPedidoLista ipe = new itemPedidoLista();
+                                ipe.setNomeProduto(obj.get("nome").getAsString());
+                                ipe.setQtdProduto(obj.get("qtd").getAsInt());
+                                ipe.setIdItemPedido(obj.get("iditem").getAsInt());
+                                ipe.setPrecoItem(obj.get("precoProduto").getAsDouble());
+
+                                Double precoUnitario = obj.get("precoProduto").getAsDouble();
+                                int qtdUnitario = obj.get("qtd").getAsInt();
+
+                                Double precoMultiplicado = precoUnitario * qtdUnitario;
+
+
+                                precoFinal += precoMultiplicado;
+
+
+                                lista.add(ipe);
+                            }
+
+                            Locale ptBr = new Locale("pt", "BR");
+                            valorString = NumberFormat.getCurrencyInstance(ptBr).format(precoFinal);
+
+                            TextView tvPrecoFinal = findViewById(R.id.precoTotal);
+                            tvPrecoFinal.setEnabled(true);
+                            tvPrecoFinal.setText("Preço Total: " + valorString);
+
+                            if (itensAlteraveisAdapter.getCount() == 0) {
+                                Toast.makeText(visualizarComanda.this, "Nenhum item foi encontrado.", Toast.LENGTH_LONG).show();
+                            }
+                            itensAlteraveisAdapter.notifyDataSetChanged();
+                        } catch (Exception erro) {
+                            Toast.makeText(visualizarComanda.this, "Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                });
+    }
 
     private void concluirPedido(String ip) {
 

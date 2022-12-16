@@ -62,9 +62,10 @@ public class selecionarMesa extends AppCompatActivity {
             lblTitulo.setText("Selecionar Cliente");
             listarMesasComPedido(ip);
 
-        }else {
+        } else if(acao.equalsIgnoreCase("alterarMesa")){
+            listarAlteraveis(ip);
+        } else {
             listarMesas(ip);
-
         }
 
     }
@@ -117,7 +118,19 @@ public class selecionarMesa extends AppCompatActivity {
                     verpedido.putExtra("acao", acao);
                     startActivity(verpedido);
 
-                }else {
+                } else if(acao.equalsIgnoreCase("alterarMesa")) {
+                    Pedido p = new Pedido();
+                    p.setIdMesa(idMesa);
+                    p.setNumMesa(numMesa);
+                    p.setId(idPedido);
+
+                    Intent verpedido = new Intent(selecionarMesa.this, visualizarComanda.class);
+                    verpedido.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    verpedido.putExtra("acao", acao);
+                    startActivity(verpedido);
+                }
+
+                else {
 
                     Pedido p = new Pedido();
                     p.setIdMesa(idMesa);
@@ -140,26 +153,6 @@ public class selecionarMesa extends AppCompatActivity {
             }
         });
 
-
-    }
-
-    private void filterList(String text) {
-        filteredList = new ArrayList<>();
-        for (Mesa mesa : lista) {
-            if (mesa.getNomeCliente().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(mesa);
-            }
-        }
-
-        if (filteredList != null) {
-            if (filteredList.isEmpty()) {
-                mesaAdapter.setFilteredList(filteredList);
-            } else {
-                mesaAdapter.setFilteredList(filteredList);
-                MesaAdapter.setFilteredList(filteredList);
-
-            }
-        }
 
     }
 
@@ -188,6 +181,42 @@ public class selecionarMesa extends AppCompatActivity {
                             }
                             if(mesaAdapter.getCount() == 0){
                                 Toast.makeText(selecionarMesa.this, "Nenhuma mesa disponível no momento.", Toast.LENGTH_LONG).show();
+                            }
+
+                            mesaAdapter.notifyDataSetChanged();
+                        }catch (Exception erro){
+                            Toast.makeText(selecionarMesa.this, "Ocorreu um erro! Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                });
+    }
+
+    private void listarAlteraveis(String ip) {
+//        Toast.makeText(this, "alterar pedido " + ip, Toast.LENGTH_SHORT).show();
+        String url = ip + "/listarMesas.php";
+
+        Ion.with(selecionarMesa.this)
+                .load(url)
+                .setBodyParameter("statusMesa", "espera")
+                .asJsonArray()
+                .setCallback(new FutureCallback<JsonArray>(){
+                    @Override
+                    public void onCompleted(Exception e, JsonArray result){
+                        try {
+                            for (int i = 0; i < result.size(); i++) {
+                                JsonObject obj = result.get(i).getAsJsonObject();
+
+                                Mesa m = new Mesa();
+
+                                m.setId(obj.get("id").getAsInt());
+                                m.setNumero(obj.get("numero").getAsInt());
+                                m.setIdPedido(obj.get("idpedido").getAsInt());
+                                m.setNomeCliente(obj.get("nomeCliente").getAsString());
+                                lista.add(m);
+                            }
+                            if(mesaAdapter.getCount() == 0){
+                                Toast.makeText(selecionarMesa.this, "Nenhuma mesa encontrada.", Toast.LENGTH_LONG).show();
                             }
 
                             mesaAdapter.notifyDataSetChanged();
