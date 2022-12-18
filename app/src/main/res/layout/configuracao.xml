@@ -58,72 +58,90 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-
-        <TextView
-            android:id="@+id/lblOption1"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/hammersmithoneregular"
-            android:text="@string/endereco_bd"
-            android:textAlignment="center"
-            android:textColor="@color/colorAccent"
-            android:textSize="20sp" />
+            android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
-            android:orientation="vertical"
-            android:padding="20dp">
 
-            <EditText
-                android:id="@+id/edtEndereco"
-                style="@style/edt_style"
-                android:layout_weight="1"
-                android:hint="Insira o endereço. Ex: 192.168.0.1"
-                android:inputType="text" />
+            <TextView
+                android:id="@+id/lblOption1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hammersmithoneregular"
+                android:text="@string/endereco_bd"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/btnTestar"
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical"
+                android:padding="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblOption1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/edtEndereco"
+                    style="@style/edt_style"
+                    android:layout_weight="1"
+                    android:hint="Insira o endereço. Ex: 192.168.0.1"
+                    android:inputType="text" />
+
+                <Button
+                    android:id="@+id/btnTestar"
+                    style="@style/btn_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:padding="16dp"
+                    android:text="@string/verificar_conexao"
+                    android:textAlignment="center"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
                 style="@style/btn_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_gravity="center"
+                android:layout_margin="40dp"
+                android:gravity="center"
+                android:onClick="reiniciarMesa"
                 android:padding="16dp"
-                android:text="@string/verificar_conexao"
-                android:textAlignment="center"
-                android:textSize="12sp" />
-        </LinearLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/hammersmithoneregular"
+                    android:text="Reiniciar Mesas"
+                    android:textColor="@color/colorAccent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mesa_vector" />
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:onClick="reiniciarMesa"
-            style="@style/btn_style"
-            android:layout_margin="40dp"
-            android:padding="16dp"
-            >
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Reiniciar Mesas"
-                android:fontFamily="@font/hammersmithoneregular"
-                android:textColor="@color/colorAccent"
-                />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/mesa_vector"
-                />
-
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

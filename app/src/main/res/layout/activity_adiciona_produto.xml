@@ -29,8 +29,9 @@
             android:textAlignment="textStart"
             android:textAllCaps="true"
             android:textColor="@color/colorAccent"
-            android:textSize="22sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnVoltarAdc"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,68 +60,103 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/hammersmithoneregular"
-            android:text="Nome do Produto"
-            android:textColor="@color/colorAccent"
-            android:textSize="22sp" />
-
-        <EditText
-            android:id="@+id/etDescricaoProduto"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="12dp"
-            android:background="@color/colorWhite"
-            android:fontFamily="@font/hammersmithoneregular"
-            android:hint="Digite o nome do produto..."
-            android:padding="12dp" />
+            android:layout_gravity="center"
+            android:foregroundGravity="center"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/hammersmithoneregular"
-            android:text="Preço"
-            android:textColor="@color/colorAccent"
-            android:textSize="22sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hammersmithoneregular"
+                android:text="Nome do Produto"
+                android:textColor="@color/colorAccent"
+                android:textSize="22sp"
+                android:layout_margin="12dp"
+                app:layout_constraintBottom_toTopOf="@+id/etDescricaoProduto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
 
-        <EditText
-            android:id="@+id/etPrecoProduto"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="12dp"
-            android:background="@color/colorWhite"
-            android:fontFamily="@font/hammersmithoneregular"
-            android:hint="Digite o preço do produto..."
-            android:padding="12dp" />
+            <EditText
+                android:id="@+id/etDescricaoProduto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:singleLine="true"
+                android:background="@color/colorWhite"
+                android:fontFamily="@font/hammersmithoneregular"
+                android:hint="Nome do produto..."
+                android:padding="12dp"
+                app:layout_constraintBottom_toTopOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/tvCategoriaProduto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/hammersmithoneregular"
-            android:text="Categoria"
-            android:textColor="@color/colorAccent"
-            android:textSize="22sp" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hammersmithoneregular"
+                android:text="Preço"
+                android:layout_margin="12dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toTopOf="@+id/etPrecoProduto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <Spinner
-            android:id="@+id/spinnerCategoria"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="12dp"
-            android:background="@color/colorPrimaryDark"
-            android:backgroundTint="@color/colorWhite"
-            android:padding="12dp" />
+            <EditText
+                android:id="@+id/etPrecoProduto"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="16dp"
+                android:background="@color/colorWhite"
+                android:fontFamily="@font/hammersmithoneregular"
+                android:hint="Preço do produto..."
+                android:singleLine="true"
+                android:padding="12dp"
+                app:layout_constraintBottom_toTopOf="@+id/tvCategoriaProduto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/btnCadastrarProduto"
-            style="@style/btn_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="48dp"
-            android:padding="16dp"
-            android:text="Cadastrar Produto" />
+            <TextView
+                android:id="@+id/tvCategoriaProduto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hammersmithoneregular"
+                android:text="Categoria"
+                android:layout_margin="12dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toTopOf="@+id/spinnerCategoria"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Spinner
+                android:id="@+id/spinnerCategoria"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="16dp"
+                android:background="@color/colorPrimaryDark"
+                android:backgroundTint="@color/colorWhite"
+                android:padding="12dp"
+                app:layout_constraintBottom_toTopOf="@+id/btnCadastrarProduto" />
+
+            <Button
+                android:id="@+id/btnCadastrarProduto"
+                style="@style/btn_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="48dp"
+                android:padding="16dp"
+                android:text="Cadastrar Produto"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </LinearLayout>
 
